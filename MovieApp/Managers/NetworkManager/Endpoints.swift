@@ -20,9 +20,9 @@ protocol EndpointProtocol {
 //MARK: - Endpoints
 
 enum Endpoint {
-    case getUsers
-    case titleSearch(title: String, year: String,type: FilterType)
-    case posts(title: String, body: String, userID: Int)
+    case search(searchWord: String, year: String?, type: FilterType)
+    case titleSearch(title: String, year: String?, type: FilterType)
+    case idSearch(title: String)
 }
 
 extension Endpoint: EndpointProtocol {
@@ -36,10 +36,7 @@ extension Endpoint: EndpointProtocol {
 
     var path: String {
         switch self {
-            case .getUsers: return "/users"
-            case .titleSearch: return "/"
-            case .posts: return "/posts"
-
+            case .search, .titleSearch, .idSearch: return "/"
         }
     }
 
@@ -53,28 +50,40 @@ extension Endpoint: EndpointProtocol {
     }
 
     var parameters: [String : Any]? {
-        if case .posts(let title, let body, let userId) = self {
-            return ["title": title, "body": body, "userId": userId]
-        }
-
         return nil
     }
-
 
     func request() -> URLRequest {
         guard var components = URLComponents(string: baseURL) else {
             fatalError("URL ERROR")
         }
-     let urlqueryItemOfApiKey = URLQueryItem(name: "apikey", value: apiToken)
+
         //Add QueryItem
+        let urlqueryItemOfApiKey = URLQueryItem(name: "apikey", value: apiToken)
+
         if case .titleSearch(let title, let year, let type) = self {
 
             components.queryItems = [urlqueryItemOfApiKey,
                                      URLQueryItem(name: "t", value: title),
                                      URLQueryItem(name: "y", value: String(describing: year)),
                                      URLQueryItem(name: "type", value: type.value)
-                                     ]
+            ]
         }
+
+        if case .idSearch(let title) = self {
+            components.queryItems = [urlqueryItemOfApiKey,
+                                     URLQueryItem(name: "i", value: title)
+            ]
+        }
+
+        if case .search(let searchWord, let year, let type) = self {
+            components.queryItems = [urlqueryItemOfApiKey,
+                                     URLQueryItem(name: "s", value: searchWord),
+                                     URLQueryItem(name: "y", value: String(describing: year)),
+                                     URLQueryItem(name: "type", value: type.value)
+            ]
+        }
+
 
         //Add Path
         components.path = path
