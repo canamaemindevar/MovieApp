@@ -131,6 +131,5 @@ final class FilmCollectionViewCell: UICollectionViewCell {
 //            verticalStackView.topAnchor.constraint(equalTo: dummyView2.topAnchor),
 //            verticalStackView.bottomAnchor.constraint(equalTo: dummyView2.bottomAnchor)
 //        ])
-        backgroundColor = .yellow
     }
 }

@@ -15,79 +15,87 @@ protocol MainViewModelInterface {
 }
 
 final class MainViewModel: MainViewModelInterface {
-    var filterModel: SearchOptions = .init(option: .generalSearch)
+    var filterModel: SearchOptions = .init(option: .generalSearch,selectedSecond: .all)
+
+    var pageData: [ListSection]?
+    private weak var view: MainViewInterface?
+    private var manager: (IdAndTitleQueryMakeable & SearchQueryMakeable)?
+
+    init(view: MainViewInterface, manager: NetworkManager) {
+        self.view = view
+        self.manager = manager
+    }
+    func viewDidLoad() {
+        view?.prepare()
+    }
+    private let lastSearch: ListSection = {
+        .searchResponse([.init(title: "", year: "", rated: "", released: "", runtime: "", genre: "", director: "", writer: "", actors: "", plot: "", language: "", country: "", awards: "", poster: "", metascore: "", imdbRating: "", imdbVotes: "", imdbID: "", type: "", response: "", ratings: nil)])
+    }()
 
     func makeQuery(withWord: String) {
-        dump(filterModel)
         switch filterModel.option {
             case .generalSearch:
                 switch filterModel.selectedSecond?.value {
-
                     case "All":
-                        print("general -all- çalıştı ")
+                        manager?.makeSearchQuery(word: withWord, year: nil, type: nil, completion: { response in
+                            self.handleSearchResponse(response: response)
+                        })
                     case "Type":
                         if let option = filterModel.thirdOption  {
-                            print("general -type- \(option)-çalıştı ")
+
                             if option == "All" {
-                             //req without paremetre
+                                manager?.makeSearchQuery(word: withWord, year: nil, type: nil, completion: { response in
+                                    self.handleSearchResponse(response: response)
+                                })
                             } else {
-                            // req with parametre
+                                manager?.makeSearchQuery(word: withWord, year: nil, type: filterModel.thirdOption, completion: { response in
+                                    self.handleSearchResponse(response: response)
+                                })
                             }
                         }
-                        print("general -type- çalıştı ")
                     case "Year":
-                        print("general -year- çalıştı ")
+                        manager?.makeSearchQuery(word: withWord, year: filterModel.thirdOption, type: nil, completion: { response in
+                            self.handleSearchResponse(response: response)
+                        })
                     case .none:
                         Logger.shared.log(text: "general -none- çalıştı ")
                     case .some(_):
                         Logger.shared.log(text: "general -some- çalıştı ")
                 }
             case .title:
-                print("title- çalıştı ")
+                manager?.makeQueryWithTitle(title: withWord, completion: { response in
+                    self.handleResponse(response: response)
+                })
             case .id:
-                print("id- çalıştı ")
+                manager?.makeQueryWithID(id: withWord, completion: { response in
+                    self.handleResponse(response: response)
+                })
         }
     }
-
-
-    var pageData: [ListSection]? {
-        didSet {
-            view?.reloadCollectionView()
-        }
-    }
-    private weak var view: MainViewInterface?
-
-    init(view: MainViewInterface) {
-        self.view = view
-    }
-    func viewDidLoad() {
-        view?.prepare()
-        pageData = [results, lastSearch]
-        self.pageData = [.titleAndIdResponse(results.items),.searchResponse(lastSearch.items)]
-    }
-
-    private let results: ListSection = {
-        .titleAndIdResponse([
-            .init(title: "", year: "", rated: "", released: "", runtime: "", genre: "", director: "", writer: "", actors: "", plot: "", language: "", country: "", awards: "", poster: "", metascore: "", imdbRating: "", imdbVotes: "", imdbID: "", type: "", response: "", ratings: nil),
-            .init(title: "", year: "", rated: "", released: "", runtime: "", genre: "", director: "", writer: "", actors: "", plot: "", language: "", country: "", awards: "", poster: "", metascore: "", imdbRating: "", imdbVotes: "", imdbID: "", type: "", response: "", ratings: nil),
-            .init(title: "", year: "", rated: "", released: "", runtime: "", genre: "", director: "", writer: "", actors: "", plot: "", language: "", country: "", awards: "", poster: "", metascore: "", imdbRating: "", imdbVotes: "", imdbID: "", type: "", response: "", ratings: nil)])
-    }()
-
-    private let lastSearch: ListSection = {
-        .searchResponse([.init(title: "", year: "", rated: "", released: "", runtime: "", genre: "", director: "", writer: "", actors: "", plot: "", language: "", country: "", awards: "", poster: "", metascore: "", imdbRating: "", imdbVotes: "", imdbID: "", type: "", response: "", ratings: nil)])
-    }()
-
 
 }
 //MARK: - Handle Functions
 extension MainViewModel {
 
+    private func handleResponse(response:Result<TitleQueryResponse,ErrosTypes>) {
+        switch response {
+            case .success(let success):
+                if success.response == "True" {
+                    let array = Array(repeating: success, count: 1)
+                    self.handleTitleQueryResponse(response: .success(array))
+                }
+            case .failure(let failure):
+                print(failure)
+        }
+    }
+
     private func handleTitleQueryResponse(response:Result<[TitleQueryResponse],ErrosTypes>) {
         switch response {
             case .success(let success):
                 print(success)
-                //let data: [TitleQueryResponse] = [success]
-                self.pageData = [.titleAndIdResponse(success),.searchResponse(lastSearch.items)]
+                let data: [TitleQueryResponse] = success
+                self.pageData = [.titleAndIdResponse(data), .searchResponse(lastSearch.items)]
+                view?.reloadCollectionView()
             case .failure(let failure):
                 print(failure)
         }
@@ -99,7 +107,7 @@ extension MainViewModel {
                 if success.response == "True" {
                     if let searchResults = success.search {
                         let value =  searchResults.map { element in
-                            TitleQueryResponse(title: element.title,
+                                TitleQueryResponse(title: element.title,
                                                year: element.year,
                                                rated: nil,
                                                released: nil,

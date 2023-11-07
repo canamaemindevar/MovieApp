@@ -12,9 +12,9 @@ protocol MainViewInterface: AnyObject {
     func reloadCollectionView()
 }
 
-final class MainView: UIViewController {
+final class MainView: UIViewController, UISearchControllerDelegate {
     
-    private lazy var viewModel = MainViewModel(view: self)
+    private lazy var viewModel = MainViewModel(view: self, manager: NetworkManager.shared)
     private var navVc = UINavigationController()
 
     //MARK: - Components
@@ -68,7 +68,9 @@ private extension MainView {
 
 extension MainView: MainViewInterface {
     func reloadCollectionView() {
-        mainCollectionView.reloadData()
+        DispatchQueue.main.async {
+            self.mainCollectionView.reloadData()
+        }
     }
 
 
@@ -79,6 +81,7 @@ extension MainView: MainViewInterface {
       mainCollectionView.delegate = self
       mainCollectionView.dataSource = self
       mainCollectionView.collectionViewLayout = createLayout()
+      searchVc.searchBar.delegate = self
   }
 
 }
@@ -120,6 +123,10 @@ extension MainView: UICollectionViewDataSource {
         switch viewModel.pageData?[indexPath.section] {
             case .titleAndIdResponse(let items):
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilmCollectionViewCell.identifier, for: indexPath) as? FilmCollectionViewCell else { return UICollectionViewCell() }
+                if items.isEmpty == true {
+                    return UICollectionViewCell()
+                }
+                guard items[indexPath.row].title != nil else {return UICollectionViewCell()}
                 cell.item = items[indexPath.row]
                 cell.backgroundColor = .yellow
                 return cell
@@ -210,5 +217,16 @@ private extension MainView {
         section.contentInsets = .init(top: 16, leading: 12, bottom: 16, trailing: 12)
         section.orthogonalScrollingBehavior = .continuous
         return section
+    }
+}
+//MARK: - UISearchBarDelegate
+extension MainView: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let text = searchBar.text, !text.isEmpty else {return }
+        viewModel.makeQuery(withWord: text)
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        viewModel.makeQuery(withWord: "Batman")
     }
 }

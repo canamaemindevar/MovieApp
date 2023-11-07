@@ -8,12 +8,12 @@
 import Foundation
 
 protocol IdAndTitleQueryMakeable {
-    func makeQueryWithID(title: String, completion: @escaping (Result<TitleQueryResponse, ErrosTypes>) -> Void)
-    func makeQueryWithTitle(title: String, year: String?, type: FilterType, completion: @escaping (Result< TitleQueryResponse, ErrosTypes>) -> Void)
+    func makeQueryWithID(id: String, completion: @escaping (Result<TitleQueryResponse, ErrosTypes>) -> Void)
+    func makeQueryWithTitle(title: String, completion: @escaping (Result< TitleQueryResponse, ErrosTypes>) -> Void)
 }
 
 protocol SearchQueryMakeable {
-    func makeSearchQuery(word: String, year: String?, type: FilterType, completion: @escaping (Result< SearchResponse, ErrosTypes>) -> Void)
+    func makeSearchQuery(word: String, year: String?, type: String?, completion: @escaping (Result< SearchResponse, ErrosTypes>) -> Void)
 }
 
 final class NetworkManager {
@@ -22,20 +22,20 @@ final class NetworkManager {
 }
 
 extension NetworkManager: IdAndTitleQueryMakeable {
-    func makeQueryWithID(title: String, completion: @escaping (Result<TitleQueryResponse, ErrosTypes>) -> Void) {
-        let endPoint = Endpoint.idSearch(title: title)
+    func makeQueryWithID(id: String, completion: @escaping (Result<TitleQueryResponse, ErrosTypes>) -> Void) {
+        let endPoint = Endpoint.idSearch(id: id)
         CoreNetworkManager.shared.request(endPoint, completion: completion)
     }
 
-    func makeQueryWithTitle(title: String, year: String?, type: FilterType, completion: @escaping (Result< TitleQueryResponse, ErrosTypes>) -> Void) {
-        let endPoint = Endpoint.titleSearch(title: title, year: year, type: type)
+    func makeQueryWithTitle(title: String, completion: @escaping (Result< TitleQueryResponse, ErrosTypes>) -> Void) {
+        let endPoint = Endpoint.titleSearch(title: title)
         CoreNetworkManager.shared.request(endPoint, completion: completion)
     }
 }
 
 extension NetworkManager: SearchQueryMakeable {
 
-    func makeSearchQuery(word: String, year: String?, type: FilterType, completion: @escaping (Result<SearchResponse, ErrosTypes>) -> Void) {
+    func makeSearchQuery(word: String, year: String?, type: String?, completion: @escaping (Result<SearchResponse, ErrosTypes>) -> Void) {
         let endPoint = Endpoint.search(searchWord: word, year: year, type: type)
         CoreNetworkManager.shared.request(endPoint, completion: completion)
     }

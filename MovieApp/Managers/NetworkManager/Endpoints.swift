@@ -20,9 +20,9 @@ protocol EndpointProtocol {
 //MARK: - Endpoints
 
 enum Endpoint {
-    case search(searchWord: String, year: String?, type: FilterType)
-    case titleSearch(title: String, year: String?, type: FilterType)
-    case idSearch(title: String)
+    case search(searchWord: String, year: String?, type: String?)
+    case titleSearch(title: String)
+    case idSearch(id: String)
 }
 
 extension Endpoint: EndpointProtocol {
@@ -61,27 +61,32 @@ extension Endpoint: EndpointProtocol {
         //Add QueryItem
         let urlqueryItemOfApiKey = URLQueryItem(name: "apikey", value: apiToken)
 
-        if case .titleSearch(let title, let year, let type) = self {
-
+        if case .titleSearch(let title) = self {
             components.queryItems = [urlqueryItemOfApiKey,
-                                     URLQueryItem(name: "t", value: title),
-                                     URLQueryItem(name: "y", value: String(describing: year)),
-                                     URLQueryItem(name: "type", value: type.value)
+                                     URLQueryItem(name: "t", value: title)
             ]
         }
 
-        if case .idSearch(let title) = self {
+        if case .idSearch(let id) = self {
             components.queryItems = [urlqueryItemOfApiKey,
-                                     URLQueryItem(name: "i", value: title)
+                                     URLQueryItem(name: "i", value: id)
             ]
         }
 
         if case .search(let searchWord, let year, let type) = self {
-            components.queryItems = [urlqueryItemOfApiKey,
-                                     URLQueryItem(name: "s", value: searchWord),
-                                     URLQueryItem(name: "y", value: String(describing: year)),
-                                     URLQueryItem(name: "type", value: type.value)
-            ]
+            var queryItems: [URLQueryItem] = [urlqueryItemOfApiKey, URLQueryItem(name: "s", value: searchWord)]
+
+            if let year = year {
+                let yearQueryItem = URLQueryItem(name: "y", value: String(describing: year))
+                queryItems.append(yearQueryItem)
+            }
+
+            if let type = type {
+                let typeQueryItem = URLQueryItem(name: "type", value: String(describing: type))
+                queryItems.append(typeQueryItem)
+            }
+
+            components.queryItems = queryItems
         }
 
 
