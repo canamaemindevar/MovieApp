@@ -55,16 +55,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "4EB5A96E-BB5E-4615-AC36-BC6FC46E0192"
-            shouldBeEnabled = "Yes"
+            uuid = "8B42808F-5D69-4F90-9A14-7CE97AED0DC7"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MovieApp/Views/SearchOptionsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
-            landmarkName = "pickerView(_:didSelectRow:inComponent:)"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
+            landmarkName = "pickerView(_:titleForRow:forComponent:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

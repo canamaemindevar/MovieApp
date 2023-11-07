@@ -36,7 +36,6 @@ class ViewController: UIViewController {
         let vc = SearchOptionsViewController()
         vc.delegate = self
         let navVc = UINavigationController(rootViewController: vc)
-       // navVc.isModalInPresentation = true
         if let sheet = navVc.sheetPresentationController {
             sheet.detents = [.medium()]
         }
@@ -47,10 +46,8 @@ class ViewController: UIViewController {
 }
 
 extension ViewController :QueryFiltersMakeble {
-    func makeQueryFilter() {
-        print("works")
+    func makeQueryFilter(model: SearchOptions) {
+        dump(model)
     }
-
-
 }
 

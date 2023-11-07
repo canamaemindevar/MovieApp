@@ -10,6 +10,8 @@ import Foundation
 struct SearchOptions {
     var option: SearchTypes
     var filters: [SecondOptionStuct]?
+    var selectedSecond: SecondOptions?
+    var thirdOption: String?
 }
 
 struct SecondOptionStuct {

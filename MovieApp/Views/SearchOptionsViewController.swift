@@ -8,7 +8,7 @@
 import UIKit
 
 protocol QueryFiltersMakeble: AnyObject {
-    func makeQueryFilter()
+    func makeQueryFilter(model: SearchOptions)
 }
 
 final class SearchOptionsViewController: UIViewController  {
@@ -22,7 +22,7 @@ final class SearchOptionsViewController: UIViewController  {
                 .init(secondOption: .type),
                 .init(secondOption: .year)]),
 
-        .init(option: .id),
+            .init(option: .id),
         .init(option: .title)
 
     ]
@@ -32,12 +32,18 @@ final class SearchOptionsViewController: UIViewController  {
         return picker
     }()
 
+    var firstChoice: SearchTypes = .generalSearch
+    var secondChoice: SecondOptions = .all
+    var thirdChoice: String? = nil
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        setupNavigationBar()
     }
-
-    private func setup() {
+}
+private extension SearchOptionsViewController {
+    func setup() {
         mypicker.delegate = self
         mypicker.dataSource = self
         view.addSubview(mypicker)
@@ -50,10 +56,25 @@ final class SearchOptionsViewController: UIViewController  {
             mypicker.heightAnchor.constraint(equalToConstant: screen.height / 1.5)
         ])
     }
+
+    func setupNavigationBar() {
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(cancel))
+        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(done))
+        self.navigationItem.leftBarButtonItem = cancelButton
+        self.navigationItem.rightBarButtonItem = doneButton
+    }
+
+    @objc  func cancel() {
+        self.navigationController?.dismiss(animated: true)
+    }
+    @objc  func done() {
+        let model = SearchOptions(option: .generalSearch,selectedSecond: secondChoice,thirdOption: thirdChoice)
+        delegate?.makeQueryFilter(model: model)
+    }
 }
 
 extension SearchOptionsViewController: UIPickerViewDataSource {
-    func numberOfComponents (in pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 3
     }
 
@@ -75,7 +96,7 @@ extension SearchOptionsViewController: UIPickerViewDataSource {
                 }
                 return count
             default:
-                return 10
+                return 0
         }
     }
 }
@@ -103,8 +124,10 @@ extension SearchOptionsViewController: UIPickerViewDelegate{
                 return "err"
         }
     }
+
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int,
                     inComponent component: Int) {
+
         if component == 0 {
             pickerView.reloadComponent(1)
             pickerView.reloadComponent(2)
@@ -114,9 +137,20 @@ extension SearchOptionsViewController: UIPickerViewDelegate{
         let first = pickerView.selectedRow(inComponent: 0)
         let second = pickerView.selectedRow(inComponent: 1)
         let third = pickerView.selectedRow(inComponent: 2)
-        delegate?.makeQueryFilter()
-//        print(myList[first].option.value)
-//        print(myList[first].filters?[second].secondOption.value.capitalized as Any)
-//        print(myList[first].filters?[second].secondOption.nextOptionArray[third].capitalized as Any)
+        if first < myList.count {
+            self.firstChoice = myList[first].option
+            if let secondChoice = myList[first].filters, second < secondChoice.count {
+                self.secondChoice = secondChoice[second].secondOption
+                if let thirdChoice = myList[first].filters?[second].secondOption.nextOptionArray, third < thirdChoice.count {
+                    self.thirdChoice = thirdChoice[third]
+                } else {
+                    print("third index out of range")
+                }
+            } else {
+                print("second index out of range")
+            }
+        } else {
+            print("first index out of range")
+        }
     }
 }
