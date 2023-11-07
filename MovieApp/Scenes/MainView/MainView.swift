@@ -44,9 +44,10 @@ final class MainView: UIViewController, UISearchControllerDelegate {
 private extension MainView {
     func setupNavigationView() {
         navigationItem.searchController = searchVc
-        let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(showFilters))
+        let searchButton = UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"), style: .plain, target: self, action: #selector(showFilters))
         if LocalState.hasOnboarded == false {
-            let premiumButton = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(showPremium))
+            let premiumButton = UIBarButtonItem(image: UIImage(systemName: "wand.and.stars"), style: .plain, target: self, action: #selector(showPremium))
+
             navigationItem.rightBarButtonItems = [searchButton,premiumButton]
         } else {
             navigationItem.rightBarButtonItems = [searchButton]
@@ -109,7 +110,17 @@ private extension MainView {
 }
 
 extension MainView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let item = viewModel.pageData?[indexPath.section].items[indexPath.item] {
 
+            let vc = DetailView()
+
+            vc.id = item.imdbID
+            self.navigationController?.pushViewController(vc, animated: true)
+
+
+        }
+    }
 }
 
 extension MainView: UICollectionViewDataSource {
@@ -118,27 +129,31 @@ extension MainView: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        switch viewModel.pageData?[indexPath.section] {
+        guard let sections = viewModel.pageData?[indexPath.section] else { return UICollectionViewCell() }
+
+        switch sections {
             case .titleAndIdResponse(let items):
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilmCollectionViewCell.identifier, for: indexPath) as? FilmCollectionViewCell else { return UICollectionViewCell() }
-                if items.isEmpty == true {
-                    return UICollectionViewCell()
-                }
-                guard items[indexPath.row].title != nil else {return UICollectionViewCell()}
-                cell.item = items[indexPath.row]
+                guard items.indices.contains(indexPath.item) else { return cell }
+                guard items[indexPath.item].title != nil else { return cell }
+                cell.item = items[indexPath.item]
                 return cell
+
             case .lastSearchs(let items):
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LastSearchsCell.identifier, for: indexPath) as? LastSearchsCell else { return UICollectionViewCell() }
-                guard items[indexPath.row].title != nil else {return UICollectionViewCell()}
-                cell.item = items[indexPath.row]
+                guard items.indices.contains(indexPath.item) else { return cell }
+                guard items[indexPath.item].title != nil else { return cell }
+                cell.item = items[indexPath.item]
                 cell.setConts()
                 return cell
-           
-            case .none:
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilmCollectionViewCell.identifier, for: indexPath) as? FilmCollectionViewCell else { return UICollectionViewCell() }
-                return cell
+
+            default:
+                return UICollectionViewCell()
         }
     }
+
+
+
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return  viewModel.pageData?.count ?? 2
     }

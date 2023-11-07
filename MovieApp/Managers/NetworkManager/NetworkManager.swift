@@ -7,12 +7,12 @@
 
 import Foundation
 
-protocol IdAndTitleQueryMakeable {
+protocol IdAndTitleQueryMakeable: AnyObject {
     func makeQueryWithID(id: String, completion: @escaping (Result<TitleQueryResponse, ErrosTypes>) -> Void)
     func makeQueryWithTitle(title: String, completion: @escaping (Result< TitleQueryResponse, ErrosTypes>) -> Void)
 }
 
-protocol SearchQueryMakeable {
+protocol SearchQueryMakeable: AnyObject {
     func makeSearchQuery(word: String, year: String?, type: String?, completion: @escaping (Result< SearchResponse, ErrosTypes>) -> Void)
 }
 

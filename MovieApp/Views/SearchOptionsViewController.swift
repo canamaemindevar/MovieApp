@@ -48,7 +48,6 @@ private extension SearchOptionsViewController {
         mypicker.delegate = self
         mypicker.dataSource = self
         view.addSubview(mypicker)
-        view.backgroundColor = .black
         let screen = self.view.frame
         NSLayoutConstraint.activate([
             mypicker.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -56,6 +55,7 @@ private extension SearchOptionsViewController {
             mypicker.widthAnchor.constraint(equalToConstant: screen.width ),
             mypicker.heightAnchor.constraint(equalToConstant: screen.height / 1.5)
         ])
+        view.backgroundColor = UIColor(named: "backgroundColor")
     }
 
     func setupNavigationBar() {

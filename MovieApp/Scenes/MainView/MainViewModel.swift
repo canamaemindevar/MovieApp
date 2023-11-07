@@ -28,9 +28,14 @@ final class MainViewModel: MainViewModelInterface {
     func viewDidLoad() {
         view?.prepare()
         makeQuery(withWord: "Batman")
+        self.pageData = [.titleAndIdResponse(mockResponse.items), .lastSearchs(lastSearch.items)]
     }
+    private let mockResponse: ListSection = {
+        .titleAndIdResponse([.init(title: nil, year: nil, rated: nil, released: nil, runtime: nil, genre: nil, director: nil, writer: nil, actors: nil, plot: nil, language: nil, country: nil, awards: nil, poster: nil, metascore: nil, imdbRating: nil, imdbVotes: nil, imdbID: nil, type: nil, response: nil, ratings: nil)])
+    }()
     private let lastSearch: ListSection = {
-        .lastSearchs([.init(title: "", year: "", rated: "", released: "", runtime: "", genre: "", director: "", writer: "", actors: "", plot: "", language: "", country: "", awards: "", poster: "", metascore: "", imdbRating: "", imdbVotes: "", imdbID: "", type: "", response: "", ratings: nil)])
+        .lastSearchs([.init(title: "", year: "", rated: "", released: "", runtime: "", genre: "", director: "", writer: "", actors: "", plot: "", language: "", country: "", awards: "", poster: "", metascore: "", imdbRating: "", imdbVotes: "", imdbID: "", type: "", response: "", ratings: nil),
+                      .init(title: "", year: "", rated: "", released: "", runtime: "", genre: "", director: "", writer: "", actors: "", plot: "", language: "", country: "", awards: "", poster: "", metascore: "", imdbRating: "", imdbVotes: "", imdbID: "", type: "", response: "", ratings: nil)])
     }()
 
     func makeQuery(withWord: String) {
