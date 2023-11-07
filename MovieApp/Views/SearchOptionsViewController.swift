@@ -16,11 +16,12 @@ final class SearchOptionsViewController: UIViewController  {
     weak var delegate: QueryFiltersMakeble?
 
     var myList: [SearchOptions] = [
-        .init(option: .generalSearch,
-              filters: [
+        .init(option: .generalSearch, filters:
+                [
                 .init(secondOption: .all),
                 .init(secondOption: .type),
-                .init(secondOption: .year)]),
+                .init(secondOption: .year)
+                ]),
 
             .init(option: .id),
         .init(option: .title)
@@ -102,7 +103,6 @@ extension SearchOptionsViewController: UIPickerViewDataSource {
 }
 
 extension SearchOptionsViewController: UIPickerViewDelegate{
-
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         let firstChoice = pickerView.selectedRow(inComponent: 0)
         switch component {

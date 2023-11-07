@@ -28,26 +28,5 @@ class ViewController: UIViewController {
 //                    print(failure)
 //            }
 //        }
-        showPickerForFilter()
-    }
-
-    func showPickerForFilter() {
-        view.backgroundColor = .green
-        let vc = SearchOptionsViewController()
-        vc.delegate = self
-        let navVc = UINavigationController(rootViewController: vc)
-        if let sheet = navVc.sheetPresentationController {
-            sheet.detents = [.medium()]
-        }
-        navigationController?.present(navVc,animated: true)
-
-    }
-
-}
-
-extension ViewController :QueryFiltersMakeble {
-    func makeQueryFilter(model: SearchOptions) {
-        dump(model)
     }
 }
-
