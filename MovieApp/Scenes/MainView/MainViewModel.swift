@@ -38,9 +38,9 @@ final class MainViewModel: MainViewModelInterface {
                     case "Year":
                         print("general -year- çalıştı ")
                     case .none:
-                        print("general -none- çalıştı ")
+                        Logger.shared.log(text: "general -none- çalıştı ")
                     case .some(_):
-                        print("general -some- çalıştı ")
+                        Logger.shared.log(text: "general -some- çalıştı ")
                 }
             case .title:
                 print("title- çalıştı ")
@@ -77,31 +77,56 @@ final class MainViewModel: MainViewModelInterface {
         .searchResponse([.init(title: "", year: "", rated: "", released: "", runtime: "", genre: "", director: "", writer: "", actors: "", plot: "", language: "", country: "", awards: "", poster: "", metascore: "", imdbRating: "", imdbVotes: "", imdbID: "", type: "", response: "", ratings: nil)])
     }()
 
+
 }
+//MARK: - Handle Functions
+extension MainViewModel {
 
+    private func handleTitleQueryResponse(response:Result<[TitleQueryResponse],ErrosTypes>) {
+        switch response {
+            case .success(let success):
+                print(success)
+                //let data: [TitleQueryResponse] = [success]
+                self.pageData = [.titleAndIdResponse(success),.searchResponse(lastSearch.items)]
+            case .failure(let failure):
+                print(failure)
+        }
+    }
 
-/*
- return (searchResponse.search?.map({ element in
- TitleQueryResponse(title: element.title,
- year: element.year,
- rated: nil,
- released: nil,
- runtime: nil,
- genre: nil,
- director: nil,
- writer: nil,
- actors: nil,
- plot: nil,
- language: nil,
- country: nil,
- awards: nil,
- poster: element.poster,
- metascore: nil,
- imdbRating: nil,
- imdbVotes: nil,
- imdbID: element.imdbID,
- type: element.type,
- response: nil,
- ratings: nil)
- }) as! [TitleQueryResponse])
- */
+    private func handleSearchResponse(response:Result<SearchResponse,ErrosTypes>) {
+        switch response {
+            case .success(let success):
+                if success.response == "True" {
+                    if let searchResults = success.search {
+                        let value =  searchResults.map { element in
+                            TitleQueryResponse(title: element.title,
+                                               year: element.year,
+                                               rated: nil,
+                                               released: nil,
+                                               runtime: nil,
+                                               genre: nil,
+                                               director: nil,
+                                               writer: nil,
+                                               actors: nil,
+                                               plot: nil,
+                                               language: nil,
+                                               country: nil,
+                                               awards: nil,
+                                               poster: element.poster,
+                                               metascore: nil,
+                                               imdbRating: nil,
+                                               imdbVotes: nil,
+                                               imdbID: element.imdbID,
+                                               type: element.type,
+                                               response: nil,
+                                               ratings: nil)
+                        }
+                        handleTitleQueryResponse(response: .success(value))
+                    }
+
+                }
+            case .failure(let failure):
+                print(failure)
+        }
+    }
+}
