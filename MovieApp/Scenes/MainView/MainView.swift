@@ -14,7 +14,9 @@ protocol MainViewInterface: AnyObject {
 final class MainView: UIViewController {
     
     private lazy var viewModel = MainViewModel(view: self)
-    var navVc = UINavigationController()
+    private var navVc = UINavigationController()
+    private let searchVc = UISearchController(searchResultsController: nil)
+
     //MARK: - Components
 
     //MARK: - Life Cycle
@@ -22,9 +24,43 @@ final class MainView: UIViewController {
     override func viewDidLoad() {
         viewModel.viewDidLoad()
         super.viewDidLoad()
-        presentPremiumView()
-
+        prepare()
     }
+}
+
+private extension MainView {
+    func setupNavigationView() {
+        navigationItem.searchController = searchVc
+        let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(showFilters))
+        let premiumButton = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(showPremium))
+        navigationItem.rightBarButtonItems = [searchButton,premiumButton]
+    }
+
+    @objc func showFilters() {
+        showPickerForFilter()
+    }
+    @objc func showPremium() {
+        presentPremiumView()
+    }
+}
+
+//MARK: - MainViewViewInterface
+
+extension MainView: MainViewInterface { 
+
+  func prepare() { 
+      setupNavigationView()
+  }
+
+}
+extension MainView :QueryFiltersMakeble {
+    func makeQueryFilter(model: SearchOptions) {
+        dump(model)
+    }
+}
+//MARK: - Presenting Modals
+private extension MainView {
+
     func showPickerForFilter() {
         view.backgroundColor = .green
         lazy var vc = SearchOptionsViewController()
@@ -34,29 +70,11 @@ final class MainView: UIViewController {
             sheet.detents = [.medium()]
         }
         navigationController?.present(navVc,animated: true)
-
     }
 
     func presentPremiumView() {
-
         let vc = PremiumView()
         let premiumView = UIHostingController(rootView: vc)
         self.navigationController?.present(premiumView, animated: true)
-
-    }
-}
-
-//MARK: - MainViewViewInterface
-
-extension MainView: MainViewInterface { 
-
-  func prepare() { 
-    
-  }
-
-}
-extension MainView :QueryFiltersMakeble {
-    func makeQueryFilter(model: SearchOptions) {
-        dump(model)
     }
 }
