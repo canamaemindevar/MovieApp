@@ -32,8 +32,12 @@ private extension MainView {
     func setupNavigationView() {
         navigationItem.searchController = searchVc
         let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(showFilters))
-        let premiumButton = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(showPremium))
-        navigationItem.rightBarButtonItems = [searchButton,premiumButton]
+        if LocalState.hasOnboarded == false {
+            let premiumButton = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(showPremium))
+            navigationItem.rightBarButtonItems = [searchButton,premiumButton]
+        } else {
+            navigationItem.rightBarButtonItems = [searchButton]
+        }
     }
 
     @objc func showFilters() {

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A98FA7652AFA33BC001D24B8 /* PremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98FA7642AFA33BC001D24B8 /* PremiumView.swift */; };
+		A98FA7672AFA44E9001D24B8 /* LocalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98FA7662AFA44E9001D24B8 /* LocalState.swift */; };
 		A9FB58822AF9141C0077B700 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB58812AF9141C0077B700 /* AppDelegate.swift */; };
 		A9FB58842AF9141C0077B700 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB58832AF9141C0077B700 /* SceneDelegate.swift */; };
 		A9FB58862AF9141C0077B700 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB58852AF9141C0077B700 /* ViewController.swift */; };
@@ -55,6 +56,7 @@
 
 /* Begin PBXFileReference section */
 		A98FA7642AFA33BC001D24B8 /* PremiumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PremiumView.swift; sourceTree = "<group>"; };
+		A98FA7662AFA44E9001D24B8 /* LocalState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalState.swift; sourceTree = "<group>"; };
 		A9FB587E2AF9141C0077B700 /* MovieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9FB58812AF9141C0077B700 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A9FB58832AF9141C0077B700 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 				A9FB58CD2AF916180077B700 /* HTTPMethod.swift */,
 				A9FB58D12AF9185A0077B700 /* FilterType.swift */,
 				A9FB58E02AF9A28B0077B700 /* SearchTypes.swift */,
+				A98FA7662AFA44E9001D24B8 /* LocalState.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -453,6 +456,7 @@
 				A9FB58DC2AF96EDF0077B700 /* SearchOptionsViewController.swift in Sources */,
 				A9FB58842AF9141C0077B700 /* SceneDelegate.swift in Sources */,
 				A9FB58C12AF9153C0077B700 /* ColorManager.swift in Sources */,
+				A98FA7672AFA44E9001D24B8 /* LocalState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

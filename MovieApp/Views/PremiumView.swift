@@ -13,8 +13,8 @@ struct PremiumView: View {
     @State var oppValue = 0.0
 
     var body: some View {
-        ZStack(alignment:.bottom){
-            Image("")
+        ZStack(alignment:.center){
+            Image("cinema")
                 .resizable()
                 .ignoresSafeArea()
 
@@ -30,18 +30,20 @@ struct PremiumView: View {
                     .cornerRadius(20)
                 Spacer().frame (width:25)
                 VStack(alignment:.leading){
-                    Text ("Merhaba Username")
+                    Text ("Hello Cinema Lover")
                         .foregroundColor(.white)
+                        .bold()
                     Spacer().frame(height:10)
-                    Text ("ÇARSAMBA")
+                    Text ("Premium")
                         .font (.title2)
                         .bold()
                         .foregroundColor(Color(red: 180/255, green: 140/255, blue:
                                                 125/255))
 
-                    Text(Date.now.formatted()).foregroundColor(.white.opacity(0.7))
+                    Text("Features").foregroundColor(.white.opacity(0.7))
                     Spacer().frame(height:40)
-                    Button("GIRI$", action: {
+                    Button("Active It", action: {
+                        LocalState.hasOnboarded = true
                         presentationMode.wrappedValue.dismiss()
                     })
                     .buttonStyle(GirisButton())
