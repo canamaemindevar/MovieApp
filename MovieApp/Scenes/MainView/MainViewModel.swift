@@ -27,9 +27,10 @@ final class MainViewModel: MainViewModelInterface {
     }
     func viewDidLoad() {
         view?.prepare()
+        makeQuery(withWord: "Batman")
     }
     private let lastSearch: ListSection = {
-        .searchResponse([.init(title: "", year: "", rated: "", released: "", runtime: "", genre: "", director: "", writer: "", actors: "", plot: "", language: "", country: "", awards: "", poster: "", metascore: "", imdbRating: "", imdbVotes: "", imdbID: "", type: "", response: "", ratings: nil)])
+        .lastSearchs([.init(title: "", year: "", rated: "", released: "", runtime: "", genre: "", director: "", writer: "", actors: "", plot: "", language: "", country: "", awards: "", poster: "", metascore: "", imdbRating: "", imdbVotes: "", imdbID: "", type: "", response: "", ratings: nil)])
     }()
 
     func makeQuery(withWord: String) {
@@ -92,9 +93,8 @@ extension MainViewModel {
     private func handleTitleQueryResponse(response:Result<[TitleQueryResponse],ErrosTypes>) {
         switch response {
             case .success(let success):
-                print(success)
                 let data: [TitleQueryResponse] = success
-                self.pageData = [.titleAndIdResponse(data), .searchResponse(lastSearch.items)]
+                self.pageData = [.titleAndIdResponse(data), .lastSearchs(lastSearch.items)]
                 view?.reloadCollectionView()
             case .failure(let failure):
                 print(failure)

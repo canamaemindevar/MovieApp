@@ -50,8 +50,6 @@ class CoreNetworkManager: CoreNetworkManagerInterface {
 
         do {
             let succesData =  try JSONDecoder().decode(T.self, from: data)
-          let value =  try JSONSerialization.jsonObject(with: data)
-            print(value)
             compeltion(.success(succesData))
         } catch  {
             print(error)

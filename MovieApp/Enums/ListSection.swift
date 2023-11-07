@@ -9,13 +9,13 @@ import Foundation
 
 enum ListSection {
     case titleAndIdResponse([TitleQueryResponse])
-    case searchResponse([TitleQueryResponse])
+    case lastSearchs([TitleQueryResponse])
 
     var items: [TitleQueryResponse] {
         switch self {
             case .titleAndIdResponse(let array):
                 return array
-            case .searchResponse(let array):
+            case .lastSearchs(let array):
                 return array
         }
     }
@@ -28,7 +28,7 @@ enum ListSection {
         switch self {
             case .titleAndIdResponse:
                 return "Results"
-            case .searchResponse:
+            case .lastSearchs:
                 return "Last Searchs"
         }
     }

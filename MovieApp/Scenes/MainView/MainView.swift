@@ -27,6 +27,7 @@ final class MainView: UIViewController, UISearchControllerDelegate {
         collection.backgroundColor = .clear
         collection.showsVerticalScrollIndicator = false
         collection.register(FilmCollectionViewCell.self, forCellWithReuseIdentifier: FilmCollectionViewCell.identifier)
+        collection.register(LastSearchsCell.self, forCellWithReuseIdentifier: LastSearchsCell.identifier)
         collection.register(SectionHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.identifier)
         return collection
     }()
@@ -44,12 +45,11 @@ private extension MainView {
     func setupNavigationView() {
         navigationItem.searchController = searchVc
         let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(showFilters))
-        let mockreqButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(mockReq))
         if LocalState.hasOnboarded == false {
             let premiumButton = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(showPremium))
             navigationItem.rightBarButtonItems = [searchButton,premiumButton]
         } else {
-            navigationItem.rightBarButtonItems = [searchButton,mockreqButton]
+            navigationItem.rightBarButtonItems = [searchButton]
         }
     }
 
@@ -58,9 +58,6 @@ private extension MainView {
     }
     @objc func showPremium() {
         presentPremiumView()
-    }
-    @objc func mockReq() {
-        viewModel.makeQuery(withWord: "")
     }
 }
 
@@ -82,6 +79,7 @@ extension MainView: MainViewInterface {
       mainCollectionView.dataSource = self
       mainCollectionView.collectionViewLayout = createLayout()
       searchVc.searchBar.delegate = self
+      view.backgroundColor = UIColor(named: "backgroundColor")
   }
 
 }
@@ -128,17 +126,16 @@ extension MainView: UICollectionViewDataSource {
                 }
                 guard items[indexPath.row].title != nil else {return UICollectionViewCell()}
                 cell.item = items[indexPath.row]
-                cell.backgroundColor = .yellow
                 return cell
-            case .searchResponse(let items):
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilmCollectionViewCell.identifier, for: indexPath) as? FilmCollectionViewCell else { return UICollectionViewCell() }
+            case .lastSearchs(let items):
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LastSearchsCell.identifier, for: indexPath) as? LastSearchsCell else { return UICollectionViewCell() }
+                guard items[indexPath.row].title != nil else {return UICollectionViewCell()}
                 cell.item = items[indexPath.row]
-                cell.backgroundColor = .blue
+                cell.setConts()
                 return cell
            
             case .none:
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilmCollectionViewCell.identifier, for: indexPath) as? FilmCollectionViewCell else { return UICollectionViewCell() }
-                cell.backgroundColor = .red
                 return cell
         }
     }
@@ -163,7 +160,7 @@ private extension MainView {
             switch section {
                 case .titleAndIdResponse:
                     return self.makeVLayout()
-                case .searchResponse:
+                case .lastSearchs:
                     return self.makeHLayout(isSmall: true)
                 case .none:
                     return self.makeHLayout(isSmall: false)

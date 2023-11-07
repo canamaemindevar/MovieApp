@@ -14,17 +14,10 @@ final class SectionHeader: UICollectionReusableView {
     private let label: UILabel = {
         let label: UILabel = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .darkGray
+        label.textColor = .systemOrange
         label.font = .systemFont(ofSize: 22, weight: .bold)
         label.sizeToFit()
         return label
-    }()
-    private let viewAllButton: UIButton = {
-        let btn = UIButton()
-        btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setTitle("View All", for: .normal)
-        btn.setTitleColor(.systemOrange, for: .normal)
-        return btn
     }()
 
     override init(frame: CGRect) {
@@ -35,19 +28,12 @@ final class SectionHeader: UICollectionReusableView {
     private func setup() {
 
         addSubview(label)
-        addSubview(viewAllButton)
 
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(equalTo: self.topAnchor),
             label.leadingAnchor.constraint(equalTo: self.leadingAnchor,constant: 16),
             self.trailingAnchor.constraint(equalTo: label.trailingAnchor),
             self.bottomAnchor.constraint(equalTo: label.bottomAnchor)
-        ])
-        NSLayoutConstraint.activate([
-            viewAllButton.topAnchor.constraint(equalTo: topAnchor),
-            bottomAnchor.constraint(equalTo: viewAllButton.bottomAnchor),
-            trailingAnchor.constraint(equalTo: viewAllButton.trailingAnchor,constant: 16),
-            viewAllButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
 

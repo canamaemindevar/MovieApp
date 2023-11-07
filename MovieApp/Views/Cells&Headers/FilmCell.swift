@@ -13,31 +13,34 @@ final class FilmCollectionViewCell: UICollectionViewCell {
     //MARK: - Varibles
     var item: TitleQueryResponse? {
         didSet {
-//            nameLabel.name = item?.title
-//            nameLabel.layer.cornerRadius = 20
-//          //  imageView.image = item?.image
-//            categoryView.categoryName = "Western"
-//            ratingView.ratingScore = "4.9"
-//            typeView.categoryName = "Cafe"
+            nameLabel.text = item?.title
+            typeLabel.text = item?.type?.capitalized
+            yearLabel.text = item?.year
+            imageView.setImage(item?.poster)
         }
     }
 
-//    private let nameLabel: NameView = {
-//        let label = NameView()
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        return label
-//    }()
-//    private let categoryView: CategoryView = {
-//        let categoryView = CategoryView()
-//        categoryView.translatesAutoresizingMaskIntoConstraints = false
-//        return categoryView
-//    }()
-//
-//    private let ratingView: RatingView = {
-//        let ratingView = RatingView()
-//        ratingView.translatesAutoresizingMaskIntoConstraints = false
-//        return ratingView
-//    }()
+    private let nameLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        label.textColor = .red
+        return label
+    }()
+    private let typeLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        label.textColor = .orange
+        return label
+    }()
+    private let yearLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        label.textColor = .orange
+        return label
+    }()
 
     private let imageView: UIImageView = {
         let iv = UIImageView()
@@ -47,39 +50,23 @@ final class FilmCollectionViewCell: UICollectionViewCell {
         iv.tintColor = .label
         return iv
     }()
-//    private let typeView: RestaurantTypeView = {
-//        let typeView = RestaurantTypeView()
-//        typeView.translatesAutoresizingMaskIntoConstraints = false
-//        return typeView
-//    }()
 
-    private let dummyView: UIView = {
-        let iv = UIView()
+    private let lockView: UIImageView = {
+        let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.image = .checkmark
+        iv.contentMode = .scaleAspectFit
+        iv.tintColor = .label
+        iv.image = UIImage(named: "locked.png")
         return iv
     }()
-    private let dummyView2: UIView = {
-        let iv = UIView()
-        iv.translatesAutoresizingMaskIntoConstraints = false
-        return iv
-    }()
-    private let verticalStackView: UIStackView = {
-        let stackview = UIStackView()
-        stackview.translatesAutoresizingMaskIntoConstraints = false
-        stackview.distribution = .fillEqually
-        stackview.axis = .vertical
-        stackview.alignment = .leading
-        return stackview
-    }()
-
-    private let horizantalStackView: UIStackView = {
-        let stackview = UIStackView()
-        stackview.translatesAutoresizingMaskIntoConstraints = false
-        stackview.distribution = .fillEqually
-        stackview.axis = .horizontal
-        stackview.alignment = .bottom
-        stackview.spacing = 12
-        return stackview
+    private let stackview: UIStackView = {
+        let sView = UIStackView()
+        sView.translatesAutoresizingMaskIntoConstraints = false
+        sView.layer.cornerRadius = 5
+        sView.axis = .vertical
+        sView.distribution = .fillEqually
+        return sView
     }()
 
     //MARK: - Init funcs
@@ -96,40 +83,26 @@ final class FilmCollectionViewCell: UICollectionViewCell {
         item = nil
     }
     //MARK: SetConts
-    private func setConts(){
-//        contentView.addSubview(dummyView)
-//        contentView.addSubview(dummyView2)
-//        contentView.addSubview(verticalStackView)
-//        contentView.addSubview(imageView)
-//        verticalStackView.addArrangedSubview(nameLabel)
-//        verticalStackView.addArrangedSubview(horizantalStackView)
-//        horizantalStackView.addArrangedSubview(typeView)
-//        horizantalStackView.addArrangedSubview(categoryView)
-//        horizantalStackView.addArrangedSubview(ratingView)
-//
-//        NSLayoutConstraint.activate([
-//            dummyView.topAnchor.constraint(equalTo: contentView.topAnchor),
-//            dummyView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-//            contentView.trailingAnchor.constraint(equalTo: dummyView.trailingAnchor),
-//            contentView.bottomAnchor.constraint(equalTo: dummyView.bottomAnchor,constant: 40)
-//        ])
-//        NSLayoutConstraint.activate([
-//            dummyView2.topAnchor.constraint(equalTo: dummyView.bottomAnchor),
-//            dummyView2.leadingAnchor.constraint(equalTo: dummyView.leadingAnchor),
-//            dummyView2.trailingAnchor.constraint(equalTo: dummyView.trailingAnchor),
-//            bottomAnchor.constraint(equalTo: dummyView2.bottomAnchor)
-//        ])
-//        NSLayoutConstraint.activate([
-//            imageView.leadingAnchor.constraint(equalTo: dummyView.leadingAnchor),
-//            imageView.trailingAnchor.constraint(equalTo: dummyView.trailingAnchor),
-//            imageView.topAnchor.constraint(equalTo: dummyView.topAnchor),
-//            imageView.bottomAnchor.constraint(equalTo: dummyView.bottomAnchor)
-//        ])
-//        NSLayoutConstraint.activate([
-//            verticalStackView.leadingAnchor.constraint(equalTo: dummyView2.leadingAnchor,constant: 4),
-//            verticalStackView.trailingAnchor.constraint(equalTo: dummyView2.trailingAnchor,constant: 4),
-//            verticalStackView.topAnchor.constraint(equalTo: dummyView2.topAnchor),
-//            verticalStackView.bottomAnchor.constraint(equalTo: dummyView2.bottomAnchor)
-//        ])
+    func setConts(){
+        addSubview(imageView)
+        addSubview(stackview)
+        stackview.addArrangedSubview(nameLabel)
+        stackview.addArrangedSubview(typeLabel)
+        stackview.addArrangedSubview(yearLabel)
+        let screen = contentView.frame.size
+
+        NSLayoutConstraint.activate([
+            imageView.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 8),
+            imageView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+            bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8),
+            imageView.widthAnchor.constraint(equalToConstant: screen.width / 2.5)
+
+        ])
+        NSLayoutConstraint.activate([
+            stackview.topAnchor.constraint(equalTo: imageView.topAnchor),
+            stackview.leadingAnchor.constraint(equalTo: imageView.trailingAnchor,constant: 8),
+            contentView.trailingAnchor.constraint(equalTo: stackview.trailingAnchor,constant: 8),
+            stackview.bottomAnchor.constraint(equalTo: imageView.bottomAnchor)
+        ])
     }
 }
