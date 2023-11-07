@@ -10,12 +10,51 @@ import Foundation
 protocol MainViewModelInterface {
     func viewDidLoad()
     var pageData: [ListSection]? {get set}
+    var filterModel: SearchOptions {get set}
+    func makeQuery(withWord: String)
 }
 
 final class MainViewModel: MainViewModelInterface {
-    var pageData: [ListSection]?
+    var filterModel: SearchOptions = .init(option: .generalSearch)
 
-    
+    func makeQuery(withWord: String) {
+        dump(filterModel)
+        switch filterModel.option {
+            case .generalSearch:
+                switch filterModel.selectedSecond?.value {
+
+                    case "All":
+                        print("general -all- çalıştı ")
+                    case "Type":
+                        if let option = filterModel.thirdOption  {
+                            print("general -type- \(option)-çalıştı ")
+                            if option == "All" {
+                             //req without paremetre
+                            } else {
+                            // req with parametre
+                            }
+                        }
+                        print("general -type- çalıştı ")
+                    case "Year":
+                        print("general -year- çalıştı ")
+                    case .none:
+                        print("general -none- çalıştı ")
+                    case .some(_):
+                        print("general -some- çalıştı ")
+                }
+            case .title:
+                print("title- çalıştı ")
+            case .id:
+                print("id- çalıştı ")
+        }
+    }
+
+
+    var pageData: [ListSection]? {
+        didSet {
+            view?.reloadCollectionView()
+        }
+    }
     private weak var view: MainViewInterface?
 
     init(view: MainViewInterface) {
@@ -24,10 +63,14 @@ final class MainViewModel: MainViewModelInterface {
     func viewDidLoad() {
         view?.prepare()
         pageData = [results, lastSearch]
+        self.pageData = [.titleAndIdResponse(results.items),.searchResponse(lastSearch.items)]
     }
 
     private let results: ListSection = {
-        .titleAndIdResponse([.init(title: "", year: "", rated: "", released: "", runtime: "", genre: "", director: "", writer: "", actors: "", plot: "", language: "", country: "", awards: "", poster: "", metascore: "", imdbRating: "", imdbVotes: "", imdbID: "", type: "", response: "", ratings: nil)])
+        .titleAndIdResponse([
+            .init(title: "", year: "", rated: "", released: "", runtime: "", genre: "", director: "", writer: "", actors: "", plot: "", language: "", country: "", awards: "", poster: "", metascore: "", imdbRating: "", imdbVotes: "", imdbID: "", type: "", response: "", ratings: nil),
+            .init(title: "", year: "", rated: "", released: "", runtime: "", genre: "", director: "", writer: "", actors: "", plot: "", language: "", country: "", awards: "", poster: "", metascore: "", imdbRating: "", imdbVotes: "", imdbID: "", type: "", response: "", ratings: nil),
+            .init(title: "", year: "", rated: "", released: "", runtime: "", genre: "", director: "", writer: "", actors: "", plot: "", language: "", country: "", awards: "", poster: "", metascore: "", imdbRating: "", imdbVotes: "", imdbID: "", type: "", response: "", ratings: nil)])
     }()
 
     private let lastSearch: ListSection = {
@@ -35,34 +78,7 @@ final class MainViewModel: MainViewModelInterface {
     }()
 
 }
-enum ListSection {
-    case titleAndIdResponse([TitleQueryResponse])
-    case searchResponse([TitleQueryResponse])
 
-    var items: [TitleQueryResponse] {
-        switch self {
-            case .titleAndIdResponse(let array):
-                return array
-            case .searchResponse(let array):
-                return array
-
-
-        }
-    }
-
-    var count: Int {
-        return items.count
-    }
-
-    var title: String {
-        switch self {
-            case .titleAndIdResponse:
-               return "Results"
-            case .searchResponse:
-               return "Last Searchs"
-        }
-    }
-}
 
 /*
  return (searchResponse.search?.map({ element in

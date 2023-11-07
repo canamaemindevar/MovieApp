@@ -9,6 +9,7 @@ import SwiftUI
 
 protocol MainViewInterface: AnyObject {
     func prepare()
+    func reloadCollectionView()
 }
 
 final class MainView: UIViewController {
@@ -43,11 +44,12 @@ private extension MainView {
     func setupNavigationView() {
         navigationItem.searchController = searchVc
         let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(showFilters))
+        let mockreqButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(mockReq))
         if LocalState.hasOnboarded == false {
             let premiumButton = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(showPremium))
             navigationItem.rightBarButtonItems = [searchButton,premiumButton]
         } else {
-            navigationItem.rightBarButtonItems = [searchButton]
+            navigationItem.rightBarButtonItems = [searchButton,mockreqButton]
         }
     }
 
@@ -57,11 +59,18 @@ private extension MainView {
     @objc func showPremium() {
         presentPremiumView()
     }
+    @objc func mockReq() {
+        viewModel.makeQuery(withWord: "")
+    }
 }
 
 //MARK: - MainViewViewInterface
 
-extension MainView: MainViewInterface { 
+extension MainView: MainViewInterface {
+    func reloadCollectionView() {
+        mainCollectionView.reloadData()
+    }
+
 
   func prepare() { 
       setupNavigationView()
@@ -75,14 +84,13 @@ extension MainView: MainViewInterface {
 }
 extension MainView :QueryFiltersMakeble {
     func makeQueryFilter(model: SearchOptions) {
-        dump(model)
+        viewModel.filterModel = model
     }
 }
 //MARK: - Presenting Modals
 private extension MainView {
 
     func showPickerForFilter() {
-        view.backgroundColor = .green
         lazy var vc = SearchOptionsViewController()
         vc.delegate = self
         navVc = UINavigationController(rootViewController: vc)
@@ -153,7 +161,6 @@ private extension MainView {
                 case .none:
                     return self.makeHLayout(isSmall: false)
             }
-
         }
     }
 

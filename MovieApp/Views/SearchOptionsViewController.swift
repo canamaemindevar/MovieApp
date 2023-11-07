@@ -69,8 +69,9 @@ private extension SearchOptionsViewController {
         self.navigationController?.dismiss(animated: true)
     }
     @objc  func done() {
-        let model = SearchOptions(option: .generalSearch,selectedSecond: secondChoice,thirdOption: thirdChoice)
+        let model = SearchOptions(option: firstChoice,selectedSecond: secondChoice,thirdOption: thirdChoice)
         delegate?.makeQueryFilter(model: model)
+        self.navigationController?.dismiss(animated: true)
     }
 }
 
