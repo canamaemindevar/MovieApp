@@ -16,6 +16,7 @@ protocol MainViewModelInterface {
     func handleResponse(response:Result<TitleQueryResponse,ErrosTypes>)
     var searchData: [TitleQueryResponse] {get set}
     var lastSearchData:[TitleQueryResponse] {get set}
+    func viewWillAppear()
 }
 
 final class MainViewModel: MainViewModelInterface {
@@ -26,7 +27,7 @@ final class MainViewModel: MainViewModelInterface {
     var filterModel: SearchOptions = .init(option: .generalSearch,selectedSecond: .all)
     var searchData = [TitleQueryResponse]()
     var lastSearchData = [TitleQueryResponse]()
-    var enter = 0
+    var enterCount = 0
     init(view: MainViewInterface, manager: (IdAndTitleQueryMakeable & SearchQueryMakeable)?) {
         self.view = view
         self.manager = manager
@@ -36,6 +37,12 @@ final class MainViewModel: MainViewModelInterface {
         makeQuery(withWord: "Batman")
         self.lastSearchData = [.init(title: "", year: "", rated: "", released: "", runtime: "", genre: "", director: "", writer: "", actors: "", plot: "", language: "", country: "", awards: "", poster: "", metascore: "", imdbRating: "", imdbVotes: "", imdbID: "", type: "", response: "", ratings: nil),
                                             .init(title: "", year: "", rated: "", released: "", runtime: "", genre: "", director: "", writer: "", actors: "", plot: "", language: "", country: "", awards: "", poster: "", metascore: "", imdbRating: "", imdbVotes: "", imdbID: "", type: "", response: "", ratings: nil)]
+    }
+
+    func viewWillAppear() {
+        var retrievedData = UserDefaultManager.shared.fetchData()
+        self.lastSearchData = retrievedData
+        view?.reloadCollectionView()
     }
 
     func makeQuery(withWord: String) {
@@ -151,7 +158,7 @@ extension MainViewModel {
 
 
     private func handleEmptyData() {
-        enter += 1
+        enterCount += 1
         self.searchData = []
         view?.reloadCollectionView()
         view?.presentEmptyDataAlert()

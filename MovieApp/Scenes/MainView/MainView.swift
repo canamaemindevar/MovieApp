@@ -40,6 +40,10 @@ final class MainView: UIViewController, UISearchControllerDelegate {
         super.viewDidLoad()
         prepare()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.viewWillAppear()
+    }
 }
 
 private extension MainView {

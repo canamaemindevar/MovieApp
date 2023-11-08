@@ -34,6 +34,7 @@ final class DetailViewModel: DetailViewModelInterface {
                 case .success(let success):
                     if success.response == "True" {
                         self.view?.data = success
+                        UserDefaultManager.shared.updateDataWithUniqueID(success)
                     }
                 case .failure(let failure):
                     print(failure)

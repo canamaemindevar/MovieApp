@@ -58,6 +58,6 @@ final class MainViewModelTest: XCTestCase {
     func test_failQuery() {
         XCTAssertEqual(viewModel.filterModel.option, .generalSearch)
         viewModel.makeQuery(withWord: "")
-        XCTAssertEqual(viewModel.enter, 1)
+        XCTAssertEqual(viewModel.enterCount, 1)
     }
 }
