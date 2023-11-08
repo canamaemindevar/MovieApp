@@ -24,5 +24,5 @@ Pazarama iOS Bootcamp final project using omdbapi. <br/> .
       <img src="MovieApp/ScreenShots/Simulator Screenshot - iPhone 14 Pro - 2023-11-08 at 17.06.46.png" width="300" />
        <img src="MovieApp/ScreenShots/Simulator Screenshot - iPhone 14 Pro - 2023-11-08 at 17.07.08.png" width="300" />
         <img src="MovieApp/ScreenShots/Simulator Screenshot - iPhone 14 Pro - 2023-11-08 at 17.07.20.png" width="300" />
-   <img src="Pokemon/ScreenShots/gif.gif" width="300" />
 </p>
+https://github.com/canamaemindevar/MovieApp/blob/refactor%E2%9A%99%EF%B8%8F/MovieApp/ScreenShots/video.mp4
