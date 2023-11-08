@@ -202,6 +202,13 @@
 			path = LocalDbManager;
 			sourceTree = "<group>";
 		};
+		A98FA79E2AFBCCDC001D24B8 /* ScreenShots */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ScreenShots;
+			sourceTree = "<group>";
+		};
 		A9FB58752AF9141C0077B700 = {
 			isa = PBXGroup;
 			children = (
@@ -226,6 +233,7 @@
 		A9FB58802AF9141C0077B700 /* MovieApp */ = {
 			isa = PBXGroup;
 			children = (
+				A98FA79E2AFBCCDC001D24B8 /* ScreenShots */,
 				A98FA76F2AFAD2E8001D24B8 /* Extensions */,
 				A9FB58B12AF914260077B700 /* AppDelegates */,
 				A9FB58B22AF914370077B700 /* Base */,
