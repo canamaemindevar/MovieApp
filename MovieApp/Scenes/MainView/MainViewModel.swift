@@ -9,9 +9,13 @@ import Foundation
 
 protocol MainViewModelInterface {
     func viewDidLoad()
-    var pageData: [ListSection]? {get set}
     var filterModel: SearchOptions {get set}
     func makeQuery(withWord: String)
+    func handleSearchResponse(response:Result<SearchResponse,ErrosTypes>)
+    func handleTitleQueryResponse(response:Result<[TitleQueryResponse],ErrosTypes>)
+    func handleResponse(response:Result<TitleQueryResponse,ErrosTypes>)
+    var searchData: [TitleQueryResponse] {get set}
+    var lastSearchData:[TitleQueryResponse] {get set}
 }
 
 final class MainViewModel: MainViewModelInterface {
@@ -20,23 +24,18 @@ final class MainViewModel: MainViewModelInterface {
     private var manager: (IdAndTitleQueryMakeable & SearchQueryMakeable)?
 
     var filterModel: SearchOptions = .init(option: .generalSearch,selectedSecond: .all)
-    var pageData: [ListSection]? = []
-    private let mockResponse: ListSection = {
-        .titleAndIdResponse([.init(title: nil, year: nil, rated: nil, released: nil, runtime: nil, genre: nil, director: nil, writer: nil, actors: nil, plot: nil, language: nil, country: nil, awards: nil, poster: nil, metascore: nil, imdbRating: nil, imdbVotes: nil, imdbID: nil, type: nil, response: nil, ratings: nil)])
-    }()
-    private let lastSearch: ListSection = {
-        .lastSearchs([.init(title: "", year: "", rated: "", released: "", runtime: "", genre: "", director: "", writer: "", actors: "", plot: "", language: "", country: "", awards: "", poster: "", metascore: "", imdbRating: "", imdbVotes: "", imdbID: "", type: "", response: "", ratings: nil),
-                      .init(title: "", year: "", rated: "", released: "", runtime: "", genre: "", director: "", writer: "", actors: "", plot: "", language: "", country: "", awards: "", poster: "", metascore: "", imdbRating: "", imdbVotes: "", imdbID: "", type: "", response: "", ratings: nil)])
-    }()
-
-    init(view: MainViewInterface, manager: NetworkManager) {
+    var searchData = [TitleQueryResponse]()
+    var lastSearchData = [TitleQueryResponse]()
+    var enter = 0
+    init(view: MainViewInterface, manager: (IdAndTitleQueryMakeable & SearchQueryMakeable)?) {
         self.view = view
         self.manager = manager
     }
     func viewDidLoad() {
         view?.prepare()
         makeQuery(withWord: "Batman")
-        self.pageData = [.titleAndIdResponse(mockResponse.items), .lastSearchs(lastSearch.items)]
+        self.lastSearchData = [.init(title: "", year: "", rated: "", released: "", runtime: "", genre: "", director: "", writer: "", actors: "", plot: "", language: "", country: "", awards: "", poster: "", metascore: "", imdbRating: "", imdbVotes: "", imdbID: "", type: "", response: "", ratings: nil),
+                                            .init(title: "", year: "", rated: "", released: "", runtime: "", genre: "", director: "", writer: "", actors: "", plot: "", language: "", country: "", awards: "", poster: "", metascore: "", imdbRating: "", imdbVotes: "", imdbID: "", type: "", response: "", ratings: nil)]
     }
 
     func makeQuery(withWord: String) {
@@ -84,7 +83,7 @@ final class MainViewModel: MainViewModelInterface {
 //MARK: - Handle Functions
 extension MainViewModel {
 
-    private func handleResponse(response:Result<TitleQueryResponse,ErrosTypes>) {
+    func handleResponse(response:Result<TitleQueryResponse,ErrosTypes>) {
         switch response {
             case .success(let success):
                 if success.response == "True" {
@@ -99,18 +98,18 @@ extension MainViewModel {
         }
     }
 
-    private func handleTitleQueryResponse(response:Result<[TitleQueryResponse],ErrosTypes>) {
+    func handleTitleQueryResponse(response:Result<[TitleQueryResponse],ErrosTypes>) {
         switch response {
             case .success(let success):
                 let data: [TitleQueryResponse] = success
-                self.pageData = [.titleAndIdResponse(data), .lastSearchs(lastSearch.items)]
+                self.searchData = data
                 view?.reloadCollectionView()
             case .failure:
                 handleEmptyData()
         }
     }
 
-    private func handleSearchResponse(response:Result<SearchResponse,ErrosTypes>) {
+    func handleSearchResponse(response:Result<SearchResponse,ErrosTypes>) {
         switch response {
             case .success(let success):
                 if success.response == "True" {
@@ -150,8 +149,10 @@ extension MainViewModel {
         }
     }
 
+
     private func handleEmptyData() {
-        self.pageData = []
+        enter += 1
+        self.searchData = []
         view?.reloadCollectionView()
         view?.presentEmptyDataAlert()
     }

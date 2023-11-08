@@ -20,7 +20,7 @@ final class MainView: UIViewController, UISearchControllerDelegate {
 
     //MARK: - Components
     private let searchVc = UISearchController(searchResultsController: nil)
-    private let mainCollectionView: UICollectionView = {
+    let mainCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.translatesAutoresizingMaskIntoConstraints = false
@@ -122,55 +122,59 @@ extension MainView {
 
 extension MainView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let item = viewModel.pageData?[indexPath.section].items[indexPath.item] {
+
+        if indexPath.section == 0 {
             let vc = DetailView()
-            vc.id = item.imdbID
+            vc.id = viewModel.searchData[indexPath.item].imdbID
             self.navigationController?.pushViewController(vc, animated: true)
         }
+
     }
 }
 //MARK: - UICollectionViewDataSource
 
 extension MainView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.pageData?[section].count ?? 2
+        switch section {
+            case 0:
+                return viewModel.searchData.count
+            default:
+                return viewModel.lastSearchData.count
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let sections = viewModel.pageData?[indexPath.section] else { return UICollectionViewCell() }
 
-        switch sections {
-            case .titleAndIdResponse(let items):
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilmCollectionViewCell.identifier, for: indexPath) as? FilmCollectionViewCell else { return UICollectionViewCell() }
-                guard items.indices.contains(indexPath.item) else { return cell }
-                guard items[indexPath.item].title != nil else { return cell }
-                cell.item = items[indexPath.item]
+        switch indexPath.section {
+            case 0 :
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilmCollectionViewCell.identifier, for: indexPath) as? FilmCollectionViewCell else {return UICollectionViewCell()}
+                cell.item = viewModel.searchData[indexPath.item]
                 return cell
-
-            case .lastSearchs(let items):
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LastSearchsCell.identifier, for: indexPath) as? LastSearchsCell else { return UICollectionViewCell() }
-                guard items.indices.contains(indexPath.item) else { return cell }
-                guard items[indexPath.item].title != nil else { return cell }
-                cell.item = items[indexPath.item]
-                cell.setConts()
-                return cell
-
             default:
-                return UICollectionViewCell()
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LastSearchsCell.identifier, for: indexPath) as? LastSearchsCell else { return UICollectionViewCell() }
+                cell.item = viewModel.lastSearchData[indexPath.item]
+                return cell
         }
     }
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return  viewModel.pageData?.count ?? 2
+        return   2
     }
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.identifier, for: indexPath) as? SectionHeader else {
+            return UICollectionReusableView()
+        }
 
-        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: SectionHeader.identifier, for: indexPath) as? SectionHeader else {return UICollectionReusableView()}
+        if indexPath.section == 0 {
+            header.configure(text: "Search Results")
+        } else {
+            header.configure(text: "Last Searchs")
+        }
 
-        header.configure(text: viewModel.pageData?[indexPath.section].title ?? "")
         return header
     }
+
 }
 // MARK: - UICollectionViewCompositionalLayout
 
@@ -178,14 +182,11 @@ private extension MainView {
 
     func createLayout() -> UICollectionViewCompositionalLayout {
         UICollectionViewCompositionalLayout { sectionIndex,_ in
-            let section = self.viewModel.pageData?[sectionIndex]
-            switch section {
-                case .titleAndIdResponse:
+            switch sectionIndex {
+                case 0:
                     return self.makeVLayout()
-                case .lastSearchs:
+                default:
                     return self.makeHLayout(isSmall: true)
-                case .none:
-                    return self.makeHLayout(isSmall: false)
             }
         }
     }

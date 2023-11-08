@@ -18,7 +18,7 @@ final class DetailViewModel: DetailViewModelInterface {
     private weak var manager: IdAndTitleQueryMakeable?
     
 
-    init(view: DetailViewInterface,manager: IdAndTitleQueryMakeable? = NetworkManager.shared) {
+    init(view: DetailViewInterface,manager: IdAndTitleQueryMakeable?) {
         self.view = view
         self.manager = manager
     }
