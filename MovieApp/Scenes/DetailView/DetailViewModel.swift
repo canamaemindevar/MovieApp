@@ -32,7 +32,7 @@ final class DetailViewModel: DetailViewModelInterface {
         manager?.makeQueryWithID(id: id, completion: { response in
             switch response {
                 case .success(let success):
-                    if success.response == "True" {
+                    if success.response == K.trueValid.rawValue {
                         self.view?.data = success
                         UserDefaultManager.shared.updateDataWithUniqueID(success)
                     }

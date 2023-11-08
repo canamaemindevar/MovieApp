@@ -22,4 +22,7 @@ enum K: String {
     case activeIt = "Active it"
     case hello = "Hello Cinema Lover"
     case premium = "Premium"
+    case trueValid = "True"
+    case all = "All"
+    case type = "Type"
 }

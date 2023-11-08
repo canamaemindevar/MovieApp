@@ -49,14 +49,14 @@ final class MainViewModel: MainViewModelInterface {
         switch filterModel.option {
             case .generalSearch:
                 switch filterModel.selectedSecond?.value {
-                    case "All":
+                    case K.all.rawValue:
                         manager?.makeSearchQuery(word: withWord, year: nil, type: nil, completion: { response in
                             self.handleSearchResponse(response: response)
                         })
-                    case "Type":
+                    case K.type.rawValue:
                         if let option = filterModel.thirdOption  {
 
-                            if option == "All" {
+                            if option == K.all.rawValue {
                                 manager?.makeSearchQuery(word: withWord, year: nil, type: nil, completion: { response in
                                     self.handleSearchResponse(response: response)
                                 })
@@ -66,7 +66,7 @@ final class MainViewModel: MainViewModelInterface {
                                 })
                             }
                         }
-                    case "Year":
+                    case K.year.rawValue:
                         manager?.makeSearchQuery(word: withWord, year: filterModel.thirdOption, type: nil, completion: { response in
                             self.handleSearchResponse(response: response)
                         })
@@ -93,7 +93,7 @@ extension MainViewModel {
     func handleResponse(response:Result<TitleQueryResponse,ErrosTypes>) {
         switch response {
             case .success(let success):
-                if success.response == "True" {
+                if success.response == K.trueValid.rawValue {
                     let array = Array(repeating: success, count: 1)
                     self.handleTitleQueryResponse(response: .success(array))
                 } else {
@@ -119,7 +119,7 @@ extension MainViewModel {
     func handleSearchResponse(response:Result<SearchResponse,ErrosTypes>) {
         switch response {
             case .success(let success):
-                if success.response == "True" {
+                if success.response == K.trueValid.rawValue {
                     if let searchResults = success.search {
                         let value =  searchResults.map { element in
                                 TitleQueryResponse(title: element.title,

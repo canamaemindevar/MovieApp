@@ -320,7 +320,6 @@
 				A9FB58C62AF9159C0077B700 /* Logger */,
 				A9FB58C52AF9158C0077B700 /* ColorManager */,
 				A9FB58C42AF915800077B700 /* NetworkManager */,
-				A98FA7982AFBC327001D24B8 /* StringConstants.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -367,6 +366,7 @@
 				A9FB58D12AF9185A0077B700 /* FilterType.swift */,
 				A9FB58E02AF9A28B0077B700 /* SearchTypes.swift */,
 				A98FA7662AFA44E9001D24B8 /* LocalState.swift */,
+				A98FA7982AFBC327001D24B8 /* StringConstants.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
