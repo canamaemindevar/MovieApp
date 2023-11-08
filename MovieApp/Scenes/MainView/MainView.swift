@@ -127,11 +127,11 @@ extension MainView {
 extension MainView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
-        if indexPath.section == 0 {
+       // if indexPath.section == 0 {
             let vc = DetailView()
             vc.id = viewModel.searchData[indexPath.item].imdbID
             self.navigationController?.pushViewController(vc, animated: true)
-        }
+       // }
 
     }
 }
