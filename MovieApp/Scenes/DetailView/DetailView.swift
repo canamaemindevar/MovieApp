@@ -23,26 +23,33 @@ final class DetailView: UIViewController {
                 self.imageView.setImage(self.data?.poster)
                 self.nameLabel.text = self.data?.title
                 self.yearLabel.text = self.data?.year
-                self.actorsLabel.text = self.data?.actors
-                self.countryLabel.text = self.data?.country
-                self.directorLabel.text = self.data?.director
-                self.ratingLabel.text = self.data?.imdbRating
+                if let actors = self.data?.actors {
+                    self.actorsLabel.text = "Actors: \(String(describing: actors))"
+                }
+                if let country = self.data?.country {
+                    self.countryLabel.text = "Country: \(String(describing: country))"
+                }
+                if let director = self.data?.director {
+                    self.directorLabel.text = "Director: \(String(describing: director))"
+                }
+                if let rating = self.data?.imdbRating {
+                    self.ratingLabel.text = "IMDB Rating: \(String(describing:rating ))"
+                }
             }
         }
     }
     //MARK: - Components
     private let headerView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(named: "componentBackground")
-        // componentBackground
+        view.backgroundColor = .clear
         view.layer.cornerRadius = 60
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     private let footerView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(named: "componentBackground")
-        view.layer.cornerRadius = 60
+        view.backgroundColor = UIColor(named: "componentBackground")?.withAlphaComponent(0.4)
+        view.layer.cornerRadius = 30
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -60,9 +67,10 @@ final class DetailView: UIViewController {
     private let nameLabel: UILabel = {
         let sView = UILabel()
         sView.translatesAutoresizingMaskIntoConstraints = false
-        sView.layer.cornerRadius = 5
+        sView.numberOfLines = 0
         sView.textColor = UIColor(named: "textLabelColor")
         sView.textAlignment = .center
+        sView.font = .boldSystemFont(ofSize: 16)
         return sView
     }()
 
@@ -80,16 +88,16 @@ final class DetailView: UIViewController {
         let sView = UILabel()
         sView.translatesAutoresizingMaskIntoConstraints = false
         sView.layer.cornerRadius = 5
-        sView.text = "sdasdasd"
+        sView.text = "Year:"
         sView.textColor = UIColor(named: "textLabelColor")
-        sView.textAlignment = .center
+        sView.textAlignment = .left
         return sView
     }()
     private let actorsLabel: UILabel = {
         let sView = UILabel()
         sView.translatesAutoresizingMaskIntoConstraints = false
         sView.layer.cornerRadius = 5
-        sView.text = "sdasdasd"
+        sView.text = "Actors:"
         sView.textAlignment = .left
         sView.numberOfLines = 0
         sView.textColor = UIColor(named: "textLabelColor")
@@ -100,7 +108,7 @@ final class DetailView: UIViewController {
         sView.translatesAutoresizingMaskIntoConstraints = false
         sView.layer.cornerRadius = 5
         sView.textColor = UIColor(named: "textLabelColor")
-        sView.text = "sdasdasd"
+        sView.text = "Country:"
         sView.textAlignment = .left
         return sView
     }()
@@ -109,7 +117,7 @@ final class DetailView: UIViewController {
         sView.translatesAutoresizingMaskIntoConstraints = false
         sView.layer.cornerRadius = 5
         sView.textColor = UIColor(named: "textLabelColor")
-        sView.text = "sdasdasd"
+        sView.text = "Director:"
         sView.textAlignment = .left
         return sView
     }()
@@ -118,7 +126,7 @@ final class DetailView: UIViewController {
         sView.translatesAutoresizingMaskIntoConstraints = false
         sView.layer.cornerRadius = 5
         sView.textColor = UIColor(named: "textLabelColor")
-        sView.text = "sdasdasd"
+        sView.text = "Rating:"
         sView.textAlignment = .left
         return sView
     }()
@@ -128,18 +136,15 @@ final class DetailView: UIViewController {
         viewModel.viewDidLoad()
         super.viewDidLoad()
     }
-
 }
 
 //MARK: - DetailViewViewInterface
 
 extension DetailView: DetailViewInterface {
 
-
   func prepare() { 
       view.backgroundColor = UIColor(named: "backgroundColor")
       let headerviewHeight = view.frame.height / 4
-
 
       view.addSubview(headerView)
       view.addSubview(nameLabel)
@@ -151,7 +156,6 @@ extension DetailView: DetailViewInterface {
       stackview.addArrangedSubview(countryLabel)
       stackview.addArrangedSubview(directorLabel)
       stackview.addArrangedSubview(ratingLabel)
-
       imageView.layer.cornerRadius = (headerviewHeight - 20) / 2
 
       NSLayoutConstraint.activate([
@@ -184,14 +188,11 @@ extension DetailView: DetailViewInterface {
         imageView.widthAnchor.constraint(equalToConstant: headerviewHeight - 20)
       ])
 
-
       NSLayoutConstraint.activate([
-        stackview.leadingAnchor.constraint(equalToSystemSpacingAfter: footerView.leadingAnchor, multiplier: 10),
+        stackview.leadingAnchor.constraint(equalToSystemSpacingAfter: footerView.leadingAnchor, multiplier: 1),
         stackview.trailingAnchor.constraint(equalToSystemSpacingAfter: footerView.trailingAnchor, multiplier: 1),
         stackview.topAnchor.constraint(equalTo: footerView.topAnchor, constant: 1),
         stackview.bottomAnchor.constraint(equalTo: footerView.bottomAnchor, constant: -20)
       ])
-
   }
-
 }
