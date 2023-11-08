@@ -30,11 +30,11 @@ struct PremiumView: View {
                     .cornerRadius(20)
                 Spacer().frame (width:25)
                 VStack(alignment:.leading){
-                    Text ("Hello Cinema Lover")
+                    Text (K.hello.rawValue)
                         .foregroundColor(.white)
                         .bold()
                     Spacer().frame(height:10)
-                    Text ("Premium")
+                    Text (K.premium.rawValue)
                         .font (.title2)
                         .bold()
                         .foregroundColor(Color(red: 180/255, green: 140/255, blue:
@@ -42,7 +42,7 @@ struct PremiumView: View {
 
                     Text("Features").foregroundColor(.white.opacity(0.7))
                     Spacer().frame(height:40)
-                    Button("Active It", action: {
+                    Button(K.activeIt.rawValue, action: {
                         LocalState.hasOnboarded = true
                         presentationMode.wrappedValue.dismiss()
                     })

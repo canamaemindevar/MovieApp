@@ -39,7 +39,7 @@ final class CustomAlertViewController: UIViewController {
         let sView = UIButton()
         sView.translatesAutoresizingMaskIntoConstraints = false
         sView.tintColor = .black
-        sView.setTitle("Tamam", for: .normal)
+        sView.setTitle(K.done.rawValue, for: .normal)
         sView.backgroundColor = .black
         return sView
     }()

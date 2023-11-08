@@ -85,7 +85,7 @@ extension MainView: MainViewInterface {
       mainCollectionView.dataSource = self
       mainCollectionView.collectionViewLayout = createLayout()
       searchVc.searchBar.delegate = self
-      view.backgroundColor = UIColor(named: "backgroundColor")
+      view.backgroundColor = .backgroundColor
   }
 
 }
@@ -117,7 +117,7 @@ extension MainView {
 
     func presentEmptyDataAlert() {
         DispatchQueue.main.async {
-            self.presentAlert(message: "No Result")
+            self.presentAlert(message: K.noResult.rawValue)
         }
 
     }
@@ -171,9 +171,9 @@ extension MainView: UICollectionViewDataSource {
         }
 
         if indexPath.section == 0 {
-            header.configure(text: "Search Results")
+            header.configure(text: K.searchResults.rawValue )
         } else {
-            header.configure(text: "Last Searchs")
+            header.configure(text: K.lastSearchs.rawValue)
         }
 
         return header
@@ -251,6 +251,6 @@ extension MainView: UISearchBarDelegate {
     }
 
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        viewModel.makeQuery(withWord: "Batman")
+        viewModel.makeQuery(withWord: K.batman.rawValue)
     }
 }

@@ -24,7 +24,7 @@ final class LastSearchsCell: UICollectionViewCell {
         iv.image = .checkmark
         iv.contentMode = .scaleAspectFit
         iv.tintColor = .label
-        iv.image = UIImage(named: "locked.png")
+        iv.image = .lockedImage
         return iv
     }()
 

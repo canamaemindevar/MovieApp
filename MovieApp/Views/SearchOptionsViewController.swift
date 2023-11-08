@@ -55,12 +55,12 @@ private extension SearchOptionsViewController {
             mypicker.widthAnchor.constraint(equalToConstant: screen.width ),
             mypicker.heightAnchor.constraint(equalToConstant: screen.height / 1.5)
         ])
-        view.backgroundColor = UIColor(named: "backgroundColor")
+        view.backgroundColor = .backgroundColor
     }
 
     func setupNavigationBar() {
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(cancel))
-        let doneButton = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(done))
+        let cancelButton = UIBarButtonItem(title: K.cancel.rawValue, style: .done, target: self, action: #selector(cancel))
+        let doneButton = UIBarButtonItem(title: K.done.rawValue, style: .done, target: self, action: #selector(done))
         self.navigationItem.leftBarButtonItem = cancelButton
         self.navigationItem.rightBarButtonItem = doneButton
     }
@@ -91,7 +91,7 @@ extension SearchOptionsViewController: UIPickerViewDataSource {
                 let secondChoice = pickerView.selectedRow(inComponent: 1)
                 let count: Int
                 let thirdOption = myList[firstChoice].filters?[secondChoice]
-                if thirdOption?.secondOption.value == "Year" {
+                if thirdOption?.secondOption.value == K.year.rawValue {
                     count = 10
                 } else {
                     count = thirdOption?.secondOption.nextOptionArray.count ?? 0
@@ -115,7 +115,7 @@ extension SearchOptionsViewController: UIPickerViewDelegate{
                 let secondChoice = pickerView.selectedRow(inComponent: 1)
                 let str: String
                 let thirdChoice = myList[firstChoice].filters?[secondChoice]
-                if thirdChoice?.secondOption.value == "Year" {
+                if thirdChoice?.secondOption.value == K.year.rawValue {
                     str = thirdChoice?.secondOption.nextOptionArray[row].capitalized ?? ""
                 } else {
                     str = thirdChoice?.secondOption.nextOptionArray[row].capitalized ?? ""

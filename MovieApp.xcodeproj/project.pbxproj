@@ -21,6 +21,9 @@
 		A98FA7872AFB8DAB001D24B8 /* MockNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98FA7862AFB8DAB001D24B8 /* MockNetworkManager.swift */; };
 		A98FA78C2AFBB1D3001D24B8 /* MockDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98FA78B2AFBB1D3001D24B8 /* MockDetailView.swift */; };
 		A98FA7972AFBBFAD001D24B8 /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98FA7962AFBBFAD001D24B8 /* UserDefaultManager.swift */; };
+		A98FA7992AFBC327001D24B8 /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98FA7982AFBC327001D24B8 /* StringConstants.swift */; };
+		A98FA79B2AFBC82E001D24B8 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98FA79A2AFBC82E001D24B8 /* UIColor+Extension.swift */; };
+		A98FA79D2AFBC84E001D24B8 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98FA79C2AFBC84E001D24B8 /* UIImage+Extension.swift */; };
 		A9FB58822AF9141C0077B700 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB58812AF9141C0077B700 /* AppDelegate.swift */; };
 		A9FB58842AF9141C0077B700 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB58832AF9141C0077B700 /* SceneDelegate.swift */; };
 		A9FB58862AF9141C0077B700 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB58852AF9141C0077B700 /* ViewController.swift */; };
@@ -78,6 +81,9 @@
 		A98FA7862AFB8DAB001D24B8 /* MockNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkManager.swift; sourceTree = "<group>"; };
 		A98FA78B2AFBB1D3001D24B8 /* MockDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDetailView.swift; sourceTree = "<group>"; };
 		A98FA7962AFBBFAD001D24B8 /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
+		A98FA7982AFBC327001D24B8 /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstants.swift; sourceTree = "<group>"; };
+		A98FA79A2AFBC82E001D24B8 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		A98FA79C2AFBC84E001D24B8 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		A9FB587E2AF9141C0077B700 /* MovieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9FB58812AF9141C0077B700 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A9FB58832AF9141C0077B700 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -151,6 +157,8 @@
 			children = (
 				A98FA7702AFAD301001D24B8 /* UIImageView+Extensions.swift */,
 				A98FA7772AFB7ADF001D24B8 /* UIView+Extensions.swift */,
+				A98FA79A2AFBC82E001D24B8 /* UIColor+Extension.swift */,
+				A98FA79C2AFBC84E001D24B8 /* UIImage+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -312,6 +320,7 @@
 				A9FB58C62AF9159C0077B700 /* Logger */,
 				A9FB58C52AF9158C0077B700 /* ColorManager */,
 				A9FB58C42AF915800077B700 /* NetworkManager */,
+				A98FA7982AFBC327001D24B8 /* StringConstants.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -539,6 +548,8 @@
 				A9FB58BD2AF9149E0077B700 /* DetailView.swift in Sources */,
 				A9FB58D02AF916520077B700 /* Endpoints.swift in Sources */,
 				A9FB58BE2AF9149E0077B700 /* DetailViewModel.swift in Sources */,
+				A98FA79B2AFBC82E001D24B8 /* UIColor+Extension.swift in Sources */,
+				A98FA7992AFBC327001D24B8 /* StringConstants.swift in Sources */,
 				A9FB58D72AF926330077B700 /* NetworkManager.swift in Sources */,
 				A98FA7652AFA33BC001D24B8 /* PremiumView.swift in Sources */,
 				A9FB58D92AF95CC50077B700 /* SearchResponse.swift in Sources */,
@@ -556,6 +567,7 @@
 				A9FB58CE2AF916180077B700 /* HTTPMethod.swift in Sources */,
 				A9FB58C92AF915B50077B700 /* CoreNetworkManager.swift in Sources */,
 				A9FB58DC2AF96EDF0077B700 /* SearchOptionsViewController.swift in Sources */,
+				A98FA79D2AFBC84E001D24B8 /* UIImage+Extension.swift in Sources */,
 				A98FA76B2AFA5253001D24B8 /* SectionHeader.swift in Sources */,
 				A9FB58842AF9141C0077B700 /* SceneDelegate.swift in Sources */,
 				A9FB58C12AF9153C0077B700 /* ColorManager.swift in Sources */,
