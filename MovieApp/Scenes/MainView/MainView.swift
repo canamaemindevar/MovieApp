@@ -10,6 +10,7 @@ import SwiftUI
 protocol MainViewInterface: AnyObject {
     func prepare()
     func reloadCollectionView()
+    func presentEmptyDataAlert()
 }
 
 final class MainView: UIViewController, UISearchControllerDelegate {
@@ -55,7 +56,7 @@ private extension MainView {
     }
 
     @objc func showFilters() {
-        showPickerForFilter()
+        presentPickerForFilter()
     }
     @objc func showPremium() {
         presentPremiumView()
@@ -84,15 +85,17 @@ extension MainView: MainViewInterface {
   }
 
 }
+//MARK: - QueryFiltersMakeble
+
 extension MainView :QueryFiltersMakeble {
     func makeQueryFilter(model: SearchOptions) {
         viewModel.filterModel = model
     }
 }
 //MARK: - Presenting Modals
-private extension MainView {
 
-    func showPickerForFilter() {
+extension MainView {
+   private func presentPickerForFilter() {
         lazy var vc = SearchOptionsViewController()
         vc.delegate = self
         navVc = UINavigationController(rootViewController: vc)
@@ -102,26 +105,31 @@ private extension MainView {
         navigationController?.present(navVc,animated: true)
     }
 
-    func presentPremiumView() {
+   private func presentPremiumView() {
         let vc = PremiumView()
         let premiumView = UIHostingController(rootView: vc)
         self.navigationController?.present(premiumView, animated: true)
     }
+
+    func presentEmptyDataAlert() {
+        DispatchQueue.main.async {
+            self.presentAlert(message: "No Result")
+        }
+
+    }
 }
+//MARK: - UICollectionViewDelegate
 
 extension MainView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let item = viewModel.pageData?[indexPath.section].items[indexPath.item] {
-
             let vc = DetailView()
-
             vc.id = item.imdbID
             self.navigationController?.pushViewController(vc, animated: true)
-
-
         }
     }
 }
+//MARK: - UICollectionViewDataSource
 
 extension MainView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -152,8 +160,6 @@ extension MainView: UICollectionViewDataSource {
         }
     }
 
-
-
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return  viewModel.pageData?.count ?? 2
     }
@@ -167,6 +173,7 @@ extension MainView: UICollectionViewDataSource {
     }
 }
 // MARK: - UICollectionViewCompositionalLayout
+
 private extension MainView {
 
     func createLayout() -> UICollectionViewCompositionalLayout {

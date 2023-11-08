@@ -20,8 +20,7 @@ final class MainViewModel: MainViewModelInterface {
     private var manager: (IdAndTitleQueryMakeable & SearchQueryMakeable)?
 
     var filterModel: SearchOptions = .init(option: .generalSearch,selectedSecond: .all)
-    var pageData: [ListSection]?
-    
+    var pageData: [ListSection]? = []
     private let mockResponse: ListSection = {
         .titleAndIdResponse([.init(title: nil, year: nil, rated: nil, released: nil, runtime: nil, genre: nil, director: nil, writer: nil, actors: nil, plot: nil, language: nil, country: nil, awards: nil, poster: nil, metascore: nil, imdbRating: nil, imdbVotes: nil, imdbID: nil, type: nil, response: nil, ratings: nil)])
     }()
@@ -91,9 +90,12 @@ extension MainViewModel {
                 if success.response == "True" {
                     let array = Array(repeating: success, count: 1)
                     self.handleTitleQueryResponse(response: .success(array))
+                } else {
+                    handleEmptyData()
                 }
-            case .failure(let failure):
-                print(failure)
+
+            case .failure:
+                handleEmptyData()
         }
     }
 
@@ -103,8 +105,8 @@ extension MainViewModel {
                 let data: [TitleQueryResponse] = success
                 self.pageData = [.titleAndIdResponse(data), .lastSearchs(lastSearch.items)]
                 view?.reloadCollectionView()
-            case .failure(let failure):
-                print(failure)
+            case .failure:
+                handleEmptyData()
         }
     }
 
@@ -139,9 +141,19 @@ extension MainViewModel {
                         handleTitleQueryResponse(response: .success(value))
                     }
 
+                } else {
+                    handleEmptyData()
                 }
-            case .failure(let failure):
-                print(failure)
+
+            case .failure:
+                handleEmptyData()
         }
     }
+
+    private func handleEmptyData() {
+        self.pageData = []
+        view?.reloadCollectionView()
+        view?.presentEmptyDataAlert()
+    }
+
 }

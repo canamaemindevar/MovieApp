@@ -15,6 +15,8 @@
 		A98FA7712AFAD301001D24B8 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98FA7702AFAD301001D24B8 /* UIImageView+Extensions.swift */; };
 		A98FA7742AFAD321001D24B8 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = A98FA7732AFAD321001D24B8 /* SDWebImage */; };
 		A98FA7762AFAD6EE001D24B8 /* LastSearchsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98FA7752AFAD6EE001D24B8 /* LastSearchsCell.swift */; };
+		A98FA7782AFB7ADF001D24B8 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98FA7772AFB7ADF001D24B8 /* UIView+Extensions.swift */; };
+		A98FA77A2AFB7CD7001D24B8 /* CustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98FA7792AFB7CD7001D24B8 /* CustomAlertViewController.swift */; };
 		A9FB58822AF9141C0077B700 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB58812AF9141C0077B700 /* AppDelegate.swift */; };
 		A9FB58842AF9141C0077B700 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB58832AF9141C0077B700 /* SceneDelegate.swift */; };
 		A9FB58862AF9141C0077B700 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB58852AF9141C0077B700 /* ViewController.swift */; };
@@ -68,6 +70,8 @@
 		A98FA76C2AFA5722001D24B8 /* ListSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSection.swift; sourceTree = "<group>"; };
 		A98FA7702AFAD301001D24B8 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
 		A98FA7752AFAD6EE001D24B8 /* LastSearchsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastSearchsCell.swift; sourceTree = "<group>"; };
+		A98FA7772AFB7ADF001D24B8 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
+		A98FA7792AFB7CD7001D24B8 /* CustomAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertViewController.swift; sourceTree = "<group>"; };
 		A9FB587E2AF9141C0077B700 /* MovieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9FB58812AF9141C0077B700 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A9FB58832AF9141C0077B700 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -140,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				A98FA7702AFAD301001D24B8 /* UIImageView+Extensions.swift */,
+				A98FA7772AFB7ADF001D24B8 /* UIView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -324,6 +329,7 @@
 				A98FA76E2AFA67B1001D24B8 /* Cells&Headers */,
 				A9FB58DB2AF96EDF0077B700 /* SearchOptionsViewController.swift */,
 				A98FA7642AFA33BC001D24B8 /* PremiumView.swift */,
+				A98FA7792AFB7CD7001D24B8 /* CustomAlertViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -477,6 +483,7 @@
 				A98FA7762AFAD6EE001D24B8 /* LastSearchsCell.swift in Sources */,
 				A98FA7712AFAD301001D24B8 /* UIImageView+Extensions.swift in Sources */,
 				A9FB58BA2AF9148F0077B700 /* MainViewModel.swift in Sources */,
+				A98FA77A2AFB7CD7001D24B8 /* CustomAlertViewController.swift in Sources */,
 				A9FB58BD2AF9149E0077B700 /* DetailView.swift in Sources */,
 				A9FB58D02AF916520077B700 /* Endpoints.swift in Sources */,
 				A9FB58BE2AF9149E0077B700 /* DetailViewModel.swift in Sources */,
@@ -488,6 +495,7 @@
 				A9FB58D52AF926010077B700 /* TitleQueryResponse.swift in Sources */,
 				A9FB58CC2AF915FC0077B700 /* ErrosTypes.swift in Sources */,
 				A9FB58DF2AF9A26D0077B700 /* SearchOptions.swift in Sources */,
+				A98FA7782AFB7ADF001D24B8 /* UIView+Extensions.swift in Sources */,
 				A9FB58C32AF915620077B700 /* Logger.swift in Sources */,
 				A9FB58D22AF9185A0077B700 /* FilterType.swift in Sources */,
 				A9FB58B92AF9148F0077B700 /* MainView.swift in Sources */,
