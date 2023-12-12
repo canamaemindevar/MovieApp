@@ -13,7 +13,7 @@ public class LocalState {
         case isPremium
     }
 
-    public static var hasOnboarded: Bool {
+    public static var hasBought: Bool {
         get {
             return UserDefaults.standard.bool(forKey: Keys.isPremium.rawValue)
         }

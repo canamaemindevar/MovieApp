@@ -9,7 +9,6 @@ import SwiftUI
 
 struct PremiumView: View {
     @Environment(\.presentationMode) var presentationMode
-    @State var girisAnim = false
     @State var oppValue = 0.0
 
     var body: some View {
@@ -43,10 +42,10 @@ struct PremiumView: View {
                     Text("Features").foregroundColor(.white.opacity(0.7))
                     Spacer().frame(height:40)
                     Button(K.activeIt.rawValue, action: {
-                        LocalState.hasOnboarded = true
+                        LocalState.hasBought = true
                         presentationMode.wrappedValue.dismiss()
                     })
-                    .buttonStyle(GirisButton())
+                    .buttonStyle(LoginButton())
 
                 }
 
@@ -70,7 +69,7 @@ struct PremiumView_Previews: PreviewProvider {
 }
 
 
-struct GirisButton: ButtonStyle{
+struct LoginButton: ButtonStyle{
     var colorButton1 = Color(red: 90/255, green: 70/255, blue: 60/255, opacity: 1)
     func makeBody(configuration: Configuration) -> some View {
         configuration.label

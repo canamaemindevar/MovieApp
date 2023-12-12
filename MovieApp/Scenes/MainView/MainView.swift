@@ -50,7 +50,7 @@ private extension MainView {
     func setupNavigationView() {
         navigationItem.searchController = searchVc
         let searchButton = UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"), style: .plain, target: self, action: #selector(showFilters))
-        if LocalState.hasOnboarded == false {
+        if LocalState.hasBought == false {
             let premiumButton = UIBarButtonItem(image: UIImage(systemName: "wand.and.stars"), style: .plain, target: self, action: #selector(showPremium))
 
             navigationItem.rightBarButtonItems = [searchButton,premiumButton]
@@ -76,18 +76,16 @@ extension MainView: MainViewInterface {
         }
     }
 
-
-  func prepare() { 
-      setupNavigationView()
-      view.addSubview(mainCollectionView)
-      mainCollectionView.frame = view.bounds
-      mainCollectionView.delegate = self
-      mainCollectionView.dataSource = self
-      mainCollectionView.collectionViewLayout = createLayout()
-      searchVc.searchBar.delegate = self
-      view.backgroundColor = .backgroundColor
-  }
-
+    func prepare() {
+        setupNavigationView()
+        view.addSubview(mainCollectionView)
+        mainCollectionView.frame = view.bounds
+        mainCollectionView.delegate = self
+        mainCollectionView.dataSource = self
+        mainCollectionView.collectionViewLayout = createLayout()
+        searchVc.searchBar.delegate = self
+        view.backgroundColor = .backgroundColor
+    }
 }
 //MARK: - QueryFiltersMakeble
 

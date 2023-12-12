@@ -45,3 +45,12 @@ struct Rating: Codable {
     }
 }
 
+extension TitleQueryResponse {
+    static var mockData = TitleQueryResponse(title: "", year: "", rated: "",
+                                         released: "", runtime: "", genre: "",
+                                         director: "", writer: "", actors: "",
+                                         plot: "", language: "", country: "",
+                                         awards: "", poster: "", metascore: "", imdbRating: "",
+                                         imdbVotes: "", imdbID: "", type: "",
+                                         response: "", ratings: nil)
+}

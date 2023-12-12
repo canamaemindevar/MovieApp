@@ -9,8 +9,8 @@ import UIKit
 
 protocol DetailViewInterface: AnyObject {
     func prepare()
-    var  id: String? {get set}
-    var data: TitleQueryResponse? {get set}
+    var id: String? { get set}
+    var data: TitleQueryResponse? { get set}
 }
 
 final class DetailView: UIViewController {
@@ -53,8 +53,6 @@ final class DetailView: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-
-
     private let imageView: UIImageView = {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
@@ -63,7 +61,6 @@ final class DetailView: UIViewController {
         iv.tintColor = .label
         return iv
     }()
-
     private let nameLabel: UILabel = {
         let sView = UILabel()
         sView.translatesAutoresizingMaskIntoConstraints = false
@@ -73,8 +70,6 @@ final class DetailView: UIViewController {
         sView.font = .boldSystemFont(ofSize: 16)
         return sView
     }()
-
-
     private let stackview: UIStackView = {
         let sView = UIStackView()
         sView.translatesAutoresizingMaskIntoConstraints = false
@@ -83,7 +78,6 @@ final class DetailView: UIViewController {
         sView.distribution = .fillProportionally
         return sView
     }()
-
     private let yearLabel: UILabel = {
         let sView = UILabel()
         sView.translatesAutoresizingMaskIntoConstraints = false

@@ -24,21 +24,21 @@ final class FilmCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.textColor = .red
+        label.textColor = .textLabelColor
         return label
     }()
     private let typeLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.textColor = .orange
+        label.textColor = .textLabelColor
         return label
     }()
     private let yearLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.textColor = .orange
+        label.textColor = .textLabelColor
         return label
     }()
 

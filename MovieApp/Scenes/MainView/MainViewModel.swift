@@ -9,13 +9,13 @@ import Foundation
 
 protocol MainViewModelInterface {
     func viewDidLoad()
-    var filterModel: SearchOptions {get set}
+    var filterModel: SearchOptions { get set}
     func makeQuery(withWord: String)
     func handleSearchResponse(response:Result<SearchResponse,ErrosTypes>)
     func handleTitleQueryResponse(response:Result<[TitleQueryResponse],ErrosTypes>)
     func handleResponse(response:Result<TitleQueryResponse,ErrosTypes>)
-    var searchData: [TitleQueryResponse] {get set}
-    var lastSearchData:[TitleQueryResponse] {get set}
+    var searchData: [TitleQueryResponse] { get set}
+    var lastSearchData:[TitleQueryResponse] { get set}
     func viewWillAppear()
 }
 
@@ -35,8 +35,7 @@ final class MainViewModel: MainViewModelInterface {
     func viewDidLoad() {
         view?.prepare()
         makeQuery(withWord: "Batman")
-        self.lastSearchData = [.init(title: "", year: "", rated: "", released: "", runtime: "", genre: "", director: "", writer: "", actors: "", plot: "", language: "", country: "", awards: "", poster: "", metascore: "", imdbRating: "", imdbVotes: "", imdbID: "", type: "", response: "", ratings: nil),
-                                            .init(title: "", year: "", rated: "", released: "", runtime: "", genre: "", director: "", writer: "", actors: "", plot: "", language: "", country: "", awards: "", poster: "", metascore: "", imdbRating: "", imdbVotes: "", imdbID: "", type: "", response: "", ratings: nil)]
+        self.lastSearchData = [.mockData, .mockData]
     }
 
     func viewWillAppear() {
@@ -50,25 +49,30 @@ final class MainViewModel: MainViewModelInterface {
             case .generalSearch:
                 switch filterModel.selectedSecond?.value {
                     case K.all.rawValue:
-                        manager?.makeSearchQuery(word: withWord, year: nil, type: nil, completion: { response in
-                            self.handleSearchResponse(response: response)
+                        manager?.makeSearchQuery(word: withWord, year: nil,
+                                                 type: nil, completion: { [weak self] response in
+                            self?.handleSearchResponse(response: response)
                         })
                     case K.type.rawValue:
-                        if let option = filterModel.thirdOption  {
+                        guard let option = filterModel.thirdOption  else { return }
 
-                            if option == K.all.rawValue {
-                                manager?.makeSearchQuery(word: withWord, year: nil, type: nil, completion: { response in
-                                    self.handleSearchResponse(response: response)
-                                })
-                            } else {
-                                manager?.makeSearchQuery(word: withWord, year: nil, type: filterModel.thirdOption, completion: { response in
-                                    self.handleSearchResponse(response: response)
-                                })
-                            }
+                        if option == K.all.rawValue {
+                            manager?.makeSearchQuery(word: withWord, year: nil,
+                                                     type: nil, completion: { [weak self] response in
+                                self?.handleSearchResponse(response: response)
+                            })
+                        } else {
+                            manager?.makeSearchQuery(word: withWord, year: nil,
+                                                     type: filterModel.thirdOption,
+                                                     completion: {[weak self] response in
+                                self?.handleSearchResponse(response: response)
+                            })
                         }
+
                     case K.year.rawValue:
-                        manager?.makeSearchQuery(word: withWord, year: filterModel.thirdOption, type: nil, completion: { response in
-                            self.handleSearchResponse(response: response)
+                        manager?.makeSearchQuery(word: withWord, year: filterModel.thirdOption,
+                                                 type: nil, completion: { [weak self] response in
+                            self?.handleSearchResponse(response: response)
                         })
                     case .none:
                         Logger.shared.log(text: "general -none-")
@@ -76,12 +80,12 @@ final class MainViewModel: MainViewModelInterface {
                         Logger.shared.log(text: "general -some-")
                 }
             case .title:
-                manager?.makeQueryWithTitle(title: withWord, completion: { response in
-                    self.handleResponse(response: response)
+                manager?.makeQueryWithTitle(title: withWord, completion: { [weak self] response in
+                    self?.handleResponse(response: response)
                 })
             case .id:
-                manager?.makeQueryWithID(id: withWord, completion: { response in
-                    self.handleResponse(response: response)
+                manager?.makeQueryWithID(id: withWord, completion: { [weak self] response in
+                    self?.handleResponse(response: response)
                 })
         }
     }

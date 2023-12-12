@@ -15,5 +15,4 @@ enum ErrosTypes: String, Error {
     case generalError = "General Error"
     case parsingError = "Parsing Error"
     case responseError = "Response Error"
-
 }

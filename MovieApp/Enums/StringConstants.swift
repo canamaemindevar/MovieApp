@@ -8,7 +8,7 @@
 import Foundation
 
 enum K: String {
- case noResult = "No Result"
+    case noResult = "No Result"
     case searchResults = "Search Results"
     case lastSearchs = "Last Searchs"
     case batman = "Batman"

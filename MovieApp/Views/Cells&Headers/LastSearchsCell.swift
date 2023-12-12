@@ -12,7 +12,7 @@ final class LastSearchsCell: UICollectionViewCell {
     //MARK: - Varibles
     var item: TitleQueryResponse? {
         didSet {
-            if LocalState.hasOnboarded == true {
+            if LocalState.hasBought == true {
                 lockView.setImage(item?.poster)
             }
         }

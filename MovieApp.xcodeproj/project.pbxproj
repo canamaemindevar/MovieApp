@@ -36,7 +36,6 @@
 		A9FB58BA2AF9148F0077B700 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB58B82AF9148F0077B700 /* MainViewModel.swift */; };
 		A9FB58BD2AF9149E0077B700 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB58BB2AF9149E0077B700 /* DetailView.swift */; };
 		A9FB58BE2AF9149E0077B700 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB58BC2AF9149E0077B700 /* DetailViewModel.swift */; };
-		A9FB58C12AF9153C0077B700 /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB58C02AF9153B0077B700 /* ColorManager.swift */; };
 		A9FB58C32AF915620077B700 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB58C22AF915620077B700 /* Logger.swift */; };
 		A9FB58C92AF915B50077B700 /* CoreNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB58C82AF915B50077B700 /* CoreNetworkManager.swift */; };
 		A9FB58CC2AF915FC0077B700 /* ErrosTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB58CB2AF915FC0077B700 /* ErrosTypes.swift */; };
@@ -100,7 +99,6 @@
 		A9FB58B82AF9148F0077B700 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		A9FB58BB2AF9149E0077B700 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		A9FB58BC2AF9149E0077B700 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
-		A9FB58C02AF9153B0077B700 /* ColorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
 		A9FB58C22AF915620077B700 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		A9FB58C82AF915B50077B700 /* CoreNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreNetworkManager.swift; sourceTree = "<group>"; };
 		A9FB58CB2AF915FC0077B700 /* ErrosTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrosTypes.swift; sourceTree = "<group>"; };
@@ -326,7 +324,6 @@
 			children = (
 				A98FA7952AFBBF8C001D24B8 /* LocalDbManager */,
 				A9FB58C62AF9159C0077B700 /* Logger */,
-				A9FB58C52AF9158C0077B700 /* ColorManager */,
 				A9FB58C42AF915800077B700 /* NetworkManager */,
 			);
 			path = Managers;
@@ -340,14 +337,6 @@
 				A9FB58D62AF926330077B700 /* NetworkManager.swift */,
 			);
 			path = NetworkManager;
-			sourceTree = "<group>";
-		};
-		A9FB58C52AF9158C0077B700 /* ColorManager */ = {
-			isa = PBXGroup;
-			children = (
-				A9FB58C02AF9153B0077B700 /* ColorManager.swift */,
-			);
-			path = ColorManager;
 			sourceTree = "<group>";
 		};
 		A9FB58C62AF9159C0077B700 /* Logger */ = {
@@ -578,7 +567,6 @@
 				A98FA79D2AFBC84E001D24B8 /* UIImage+Extension.swift in Sources */,
 				A98FA76B2AFA5253001D24B8 /* SectionHeader.swift in Sources */,
 				A9FB58842AF9141C0077B700 /* SceneDelegate.swift in Sources */,
-				A9FB58C12AF9153C0077B700 /* ColorManager.swift in Sources */,
 				A98FA7672AFA44E9001D24B8 /* LocalState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
