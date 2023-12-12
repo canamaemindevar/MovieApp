@@ -52,7 +52,7 @@ class CoreNetworkManager: CoreNetworkManagerInterface {
             let succesData =  try JSONDecoder().decode(T.self, from: data)
             compeltion(.success(succesData))
         } catch  {
-            print(error)
+            Logger.shared.log(text: String(describing: error))
             compeltion(.failure(.parsingError))
         }
 

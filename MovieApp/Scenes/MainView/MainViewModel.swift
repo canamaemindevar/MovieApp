@@ -40,7 +40,7 @@ final class MainViewModel: MainViewModelInterface {
     }
 
     func viewWillAppear() {
-        var retrievedData = UserDefaultManager.shared.fetchData()
+        let retrievedData = UserDefaultManager.shared.fetchData()
         self.lastSearchData = retrievedData
         view?.reloadCollectionView()
     }
@@ -71,9 +71,9 @@ final class MainViewModel: MainViewModelInterface {
                             self.handleSearchResponse(response: response)
                         })
                     case .none:
-                        Logger.shared.log(text: "general -none- çalıştı ")
+                        Logger.shared.log(text: "general -none-")
                     case .some(_):
-                        Logger.shared.log(text: "general -some- çalıştı ")
+                        Logger.shared.log(text: "general -some-")
                 }
             case .title:
                 manager?.makeQueryWithTitle(title: withWord, completion: { response in
@@ -85,11 +85,9 @@ final class MainViewModel: MainViewModelInterface {
                 })
         }
     }
-
 }
 //MARK: - Handle Functions
 extension MainViewModel {
-
     func handleResponse(response:Result<TitleQueryResponse,ErrosTypes>) {
         switch response {
             case .success(let success):
@@ -99,7 +97,6 @@ extension MainViewModel {
                 } else {
                     handleEmptyData()
                 }
-
             case .failure:
                 handleEmptyData()
         }
@@ -146,16 +143,13 @@ extension MainViewModel {
                         }
                         handleTitleQueryResponse(response: .success(value))
                     }
-
                 } else {
                     handleEmptyData()
                 }
-
             case .failure:
                 handleEmptyData()
         }
     }
-
 
     private func handleEmptyData() {
         enterCount += 1

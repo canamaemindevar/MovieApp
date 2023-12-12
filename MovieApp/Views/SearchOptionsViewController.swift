@@ -59,8 +59,10 @@ private extension SearchOptionsViewController {
     }
 
     func setupNavigationBar() {
-        let cancelButton = UIBarButtonItem(title: K.cancel.rawValue, style: .done, target: self, action: #selector(cancel))
-        let doneButton = UIBarButtonItem(title: K.done.rawValue, style: .done, target: self, action: #selector(done))
+        let cancelButton = UIBarButtonItem(title: K.cancel.rawValue, style: .done,
+                                           target: self, action: #selector(cancel))
+        let doneButton = UIBarButtonItem(title: K.done.rawValue, style: .done,
+                                         target: self, action: #selector(done))
         self.navigationItem.leftBarButtonItem = cancelButton
         self.navigationItem.rightBarButtonItem = doneButton
     }
@@ -69,7 +71,8 @@ private extension SearchOptionsViewController {
         self.navigationController?.dismiss(animated: true)
     }
     @objc  func done() {
-        let model = SearchOptions(option: firstChoice,selectedSecond: secondChoice,thirdOption: thirdChoice)
+        let model = SearchOptions(option: firstChoice, selectedSecond: secondChoice,
+                                  thirdOption: thirdChoice)
         delegate?.makeQueryFilter(model: model)
         self.navigationController?.dismiss(animated: true)
     }
@@ -145,13 +148,13 @@ extension SearchOptionsViewController: UIPickerViewDelegate{
                 if let thirdChoice = myList[first].filters?[second].secondOption.nextOptionArray, third < thirdChoice.count {
                     self.thirdChoice = thirdChoice[third]
                 } else {
-                    print("third index out of range")
+                    Logger.shared.log(text: "third index out of range")
                 }
             } else {
-                print("second index out of range")
+                Logger.shared.log(text: "second index out of range")
             }
         } else {
-            print("first index out of range")
+            Logger.shared.log(text: "first index out of range")
         }
     }
 }

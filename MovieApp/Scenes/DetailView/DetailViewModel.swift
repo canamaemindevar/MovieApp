@@ -9,14 +9,11 @@ import Foundation
 
 protocol DetailViewModelInterface {
     func viewDidLoad()
-   
 }
 
 final class DetailViewModel: DetailViewModelInterface {
-    
     private weak var view: DetailViewInterface?
     private weak var manager: IdAndTitleQueryMakeable?
-    
 
     init(view: DetailViewInterface,manager: IdAndTitleQueryMakeable?) {
         self.view = view
@@ -29,17 +26,16 @@ final class DetailViewModel: DetailViewModelInterface {
 
     func query() {
         guard let id = view?.id else {return}
-        manager?.makeQueryWithID(id: id, completion: { response in
+        manager?.makeQueryWithID(id: id, completion: {[weak self] response in
+            guard let self = self else {return}
             switch response {
                 case .success(let success):
-                    if success.response == K.trueValid.rawValue {
-                        self.view?.data = success
-                        UserDefaultManager.shared.updateDataWithUniqueID(success)
-                    }
+                    guard success.response == K.trueValid.rawValue else { return }
+                    self.view?.data = success
+                    UserDefaultManager.shared.updateDataWithUniqueID(success)
                 case .failure(let failure):
-                    print(failure)
+                    Logger.shared.log(text: failure.rawValue)
             }
         })
     }
-    
 }

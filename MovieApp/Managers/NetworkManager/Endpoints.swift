@@ -57,7 +57,6 @@ extension Endpoint: EndpointProtocol {
         guard var components = URLComponents(string: baseURL) else {
             fatalError("URL ERROR")
         }
-
         //Add QueryItem
         let urlqueryItemOfApiKey = URLQueryItem(name: "apikey", value: apiToken)
 
@@ -66,7 +65,6 @@ extension Endpoint: EndpointProtocol {
                                      URLQueryItem(name: "t", value: title)
             ]
         }
-
         if case .idSearch(let id) = self {
             components.queryItems = [urlqueryItemOfApiKey,
                                      URLQueryItem(name: "i", value: id)
@@ -88,8 +86,6 @@ extension Endpoint: EndpointProtocol {
 
             components.queryItems = queryItems
         }
-
-
         //Add Path
         components.path = path
 
@@ -103,17 +99,15 @@ extension Endpoint: EndpointProtocol {
                 let data = try JSONSerialization.data(withJSONObject: parameters)
                 request.httpBody = data
             }catch {
-                print(error.localizedDescription)
+                Logger.shared.log(text:error.localizedDescription)
             }
         }
-
         //Add Header
         if let header = header {
             for (key, value) in header {
                 request.setValue(value, forHTTPHeaderField: key)
             }
         }
-
         return request
     }
 }

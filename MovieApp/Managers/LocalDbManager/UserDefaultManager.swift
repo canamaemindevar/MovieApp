@@ -18,7 +18,7 @@ struct UserDefaultManager {
             let encodedData = try JSONEncoder().encode(data)
             userDefaults.set(encodedData, forKey: key)
         } catch {
-            print("Error while encoding data: \(error)")
+            Logger.shared.log(text: "Error while encoding data: \(error)")
         }
     }
 
@@ -29,18 +29,16 @@ struct UserDefaultManager {
             let decodedData = try JSONDecoder().decode([TitleQueryResponse].self, from: savedData)
             return decodedData
         } catch {
-            print("Error while decoding data: \(error)")
+            Logger.shared.log(text: "Error while encoding data: \(error)")
             return []
         }
     }
 
     func updateDataWithUniqueID(_ success: TitleQueryResponse) {
         var retrievedData = fetchData()
-
         if let index = retrievedData.firstIndex(where: { $0.imdbID == success.imdbID }) {
             retrievedData.remove(at: index)
         }
-
         retrievedData.insert(success, at: 0)
         saveData(retrievedData)
     }

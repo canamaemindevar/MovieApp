@@ -9,7 +9,7 @@ import Foundation
 
 final class Logger {
     static let shared = Logger()
-    init() { }
+    private init() { }
     var shouldPrint: Bool = true
 
     func log(text: String, function: String = #function, line: Int = #line, filePath: String = #filePath) {
