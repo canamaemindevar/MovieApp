@@ -1,5 +1,5 @@
-# Pazarama iOS Bootcamp Movie App
-Pazarama iOS Bootcamp final project using omdbapi. <br/> .
+#  Movie App
+Movie App project using omdbapi. <br/> .
 ## Technologies and Libraries
 - Protocol Oriented Programming
 - Programmatic UI
