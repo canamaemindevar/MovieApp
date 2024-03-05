@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A945009F2B8B86DB0003785E /* MNetwork in Frameworks */ = {isa = PBXBuildFile; productRef = A945009E2B8B86DB0003785E /* MNetwork */; };
+		A94BED592B8B95D800592CF7 /* MCore in Frameworks */ = {isa = PBXBuildFile; productRef = A94BED582B8B95D800592CF7 /* MCore */; };
 		A98FA7652AFA33BC001D24B8 /* PremiumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98FA7642AFA33BC001D24B8 /* PremiumView.swift */; };
 		A98FA7672AFA44E9001D24B8 /* LocalState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98FA7662AFA44E9001D24B8 /* LocalState.swift */; };
 		A98FA7692AFA4DAD001D24B8 /* FilmCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98FA7682AFA4DAD001D24B8 /* FilmCell.swift */; };
@@ -37,17 +39,8 @@
 		A9FB58BD2AF9149E0077B700 /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB58BB2AF9149E0077B700 /* DetailView.swift */; };
 		A9FB58BE2AF9149E0077B700 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB58BC2AF9149E0077B700 /* DetailViewModel.swift */; };
 		A9FB58C32AF915620077B700 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB58C22AF915620077B700 /* Logger.swift */; };
-		A9FB58C92AF915B50077B700 /* CoreNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB58C82AF915B50077B700 /* CoreNetworkManager.swift */; };
-		A9FB58CC2AF915FC0077B700 /* ErrosTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB58CB2AF915FC0077B700 /* ErrosTypes.swift */; };
-		A9FB58CE2AF916180077B700 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB58CD2AF916180077B700 /* HTTPMethod.swift */; };
-		A9FB58D02AF916520077B700 /* Endpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB58CF2AF916520077B700 /* Endpoints.swift */; };
 		A9FB58D22AF9185A0077B700 /* FilterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB58D12AF9185A0077B700 /* FilterType.swift */; };
-		A9FB58D52AF926010077B700 /* TitleQueryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB58D42AF926010077B700 /* TitleQueryResponse.swift */; };
-		A9FB58D72AF926330077B700 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB58D62AF926330077B700 /* NetworkManager.swift */; };
-		A9FB58D92AF95CC50077B700 /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB58D82AF95CC50077B700 /* SearchResponse.swift */; };
 		A9FB58DC2AF96EDF0077B700 /* SearchOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB58DB2AF96EDF0077B700 /* SearchOptionsViewController.swift */; };
-		A9FB58DF2AF9A26D0077B700 /* SearchOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB58DE2AF9A26D0077B700 /* SearchOptions.swift */; };
-		A9FB58E12AF9A28B0077B700 /* SearchTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9FB58E02AF9A28B0077B700 /* SearchTypes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,17 +93,8 @@
 		A9FB58BB2AF9149E0077B700 /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		A9FB58BC2AF9149E0077B700 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		A9FB58C22AF915620077B700 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		A9FB58C82AF915B50077B700 /* CoreNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreNetworkManager.swift; sourceTree = "<group>"; };
-		A9FB58CB2AF915FC0077B700 /* ErrosTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrosTypes.swift; sourceTree = "<group>"; };
-		A9FB58CD2AF916180077B700 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
-		A9FB58CF2AF916520077B700 /* Endpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoints.swift; sourceTree = "<group>"; };
 		A9FB58D12AF9185A0077B700 /* FilterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterType.swift; sourceTree = "<group>"; };
-		A9FB58D42AF926010077B700 /* TitleQueryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleQueryResponse.swift; sourceTree = "<group>"; };
-		A9FB58D62AF926330077B700 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		A9FB58D82AF95CC50077B700 /* SearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
 		A9FB58DB2AF96EDF0077B700 /* SearchOptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchOptionsViewController.swift; sourceTree = "<group>"; };
-		A9FB58DE2AF9A26D0077B700 /* SearchOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchOptions.swift; sourceTree = "<group>"; };
-		A9FB58E02AF9A28B0077B700 /* SearchTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTypes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,7 +102,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A94BED592B8B95D800592CF7 /* MCore in Frameworks */,
 				A98FA7742AFAD321001D24B8 /* SDWebImage in Frameworks */,
+				A945009F2B8B86DB0003785E /* MNetwork in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,6 +126,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A94BED5A2B8B964A00592CF7 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		A98FA76E2AFA67B1001D24B8 /* Cells&Headers */ = {
 			isa = PBXGroup;
 			children = (
@@ -210,6 +203,7 @@
 		A9FB58752AF9141C0077B700 = {
 			isa = PBXGroup;
 			children = (
+				A94BED5A2B8B964A00592CF7 /* Packages */,
 				A9FB58802AF9141C0077B700 /* MovieApp */,
 				A9FB58972AF9141D0077B700 /* MovieAppTests */,
 				A9FB58A12AF9141D0077B700 /* MovieAppUITests */,
@@ -238,7 +232,6 @@
 				A9FB58CA2AF915EE0077B700 /* Enums */,
 				A9FB588F2AF9141D0077B700 /* Info.plist */,
 				A9FB58BF2AF9152D0077B700 /* Managers */,
-				A9FB58D32AF925F20077B700 /* Models */,
 				A9FB58B32AF914500077B700 /* Resources */,
 				A9FB58B42AF914660077B700 /* Scenes */,
 				A9FB58DA2AF96EA70077B700 /* Views */,
@@ -324,19 +317,8 @@
 			children = (
 				A98FA7952AFBBF8C001D24B8 /* LocalDbManager */,
 				A9FB58C62AF9159C0077B700 /* Logger */,
-				A9FB58C42AF915800077B700 /* NetworkManager */,
 			);
 			path = Managers;
-			sourceTree = "<group>";
-		};
-		A9FB58C42AF915800077B700 /* NetworkManager */ = {
-			isa = PBXGroup;
-			children = (
-				A9FB58C72AF915A50077B700 /* CoreNetwork */,
-				A9FB58CF2AF916520077B700 /* Endpoints.swift */,
-				A9FB58D62AF926330077B700 /* NetworkManager.swift */,
-			);
-			path = NetworkManager;
 			sourceTree = "<group>";
 		};
 		A9FB58C62AF9159C0077B700 /* Logger */ = {
@@ -347,34 +329,14 @@
 			path = Logger;
 			sourceTree = "<group>";
 		};
-		A9FB58C72AF915A50077B700 /* CoreNetwork */ = {
-			isa = PBXGroup;
-			children = (
-				A9FB58C82AF915B50077B700 /* CoreNetworkManager.swift */,
-			);
-			path = CoreNetwork;
-			sourceTree = "<group>";
-		};
 		A9FB58CA2AF915EE0077B700 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
-				A9FB58CB2AF915FC0077B700 /* ErrosTypes.swift */,
-				A9FB58CD2AF916180077B700 /* HTTPMethod.swift */,
 				A9FB58D12AF9185A0077B700 /* FilterType.swift */,
-				A9FB58E02AF9A28B0077B700 /* SearchTypes.swift */,
 				A98FA7662AFA44E9001D24B8 /* LocalState.swift */,
 				A98FA7982AFBC327001D24B8 /* StringConstants.swift */,
 			);
 			path = Enums;
-			sourceTree = "<group>";
-		};
-		A9FB58D32AF925F20077B700 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				A9FB58DD2AF9A2530077B700 /* ResponseModels */,
-				A9FB58DE2AF9A26D0077B700 /* SearchOptions.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		A9FB58DA2AF96EA70077B700 /* Views */ = {
@@ -386,15 +348,6 @@
 				A98FA7792AFB7CD7001D24B8 /* CustomAlertViewController.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		A9FB58DD2AF9A2530077B700 /* ResponseModels */ = {
-			isa = PBXGroup;
-			children = (
-				A9FB58D42AF926010077B700 /* TitleQueryResponse.swift */,
-				A9FB58D82AF95CC50077B700 /* SearchResponse.swift */,
-			);
-			path = ResponseModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -415,6 +368,8 @@
 			name = MovieApp;
 			packageProductDependencies = (
 				A98FA7732AFAD321001D24B8 /* SDWebImage */,
+				A945009E2B8B86DB0003785E /* MNetwork */,
+				A94BED582B8B95D800592CF7 /* MCore */,
 			);
 			productName = MovieApp;
 			productReference = A9FB587E2AF9141C0077B700 /* MovieApp.app */;
@@ -493,6 +448,8 @@
 			mainGroup = A9FB58752AF9141C0077B700;
 			packageReferences = (
 				A98FA7722AFAD321001D24B8 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				A945009D2B8B86DB0003785E /* XCRemoteSwiftPackageReference "MNetwork" */,
+				A94BED572B8B95D800592CF7 /* XCRemoteSwiftPackageReference "MCore" */,
 			);
 			productRefGroup = A9FB587F2AF9141C0077B700 /* Products */;
 			projectDirPath = "";
@@ -543,26 +500,17 @@
 				A9FB58BA2AF9148F0077B700 /* MainViewModel.swift in Sources */,
 				A98FA77A2AFB7CD7001D24B8 /* CustomAlertViewController.swift in Sources */,
 				A9FB58BD2AF9149E0077B700 /* DetailView.swift in Sources */,
-				A9FB58D02AF916520077B700 /* Endpoints.swift in Sources */,
 				A9FB58BE2AF9149E0077B700 /* DetailViewModel.swift in Sources */,
 				A98FA79B2AFBC82E001D24B8 /* UIColor+Extension.swift in Sources */,
 				A98FA7992AFBC327001D24B8 /* StringConstants.swift in Sources */,
-				A9FB58D72AF926330077B700 /* NetworkManager.swift in Sources */,
 				A98FA7652AFA33BC001D24B8 /* PremiumView.swift in Sources */,
-				A9FB58D92AF95CC50077B700 /* SearchResponse.swift in Sources */,
 				A9FB58862AF9141C0077B700 /* ViewController.swift in Sources */,
-				A9FB58E12AF9A28B0077B700 /* SearchTypes.swift in Sources */,
-				A9FB58D52AF926010077B700 /* TitleQueryResponse.swift in Sources */,
-				A9FB58CC2AF915FC0077B700 /* ErrosTypes.swift in Sources */,
-				A9FB58DF2AF9A26D0077B700 /* SearchOptions.swift in Sources */,
 				A98FA7782AFB7ADF001D24B8 /* UIView+Extensions.swift in Sources */,
 				A9FB58C32AF915620077B700 /* Logger.swift in Sources */,
 				A9FB58D22AF9185A0077B700 /* FilterType.swift in Sources */,
 				A9FB58B92AF9148F0077B700 /* MainView.swift in Sources */,
 				A98FA7692AFA4DAD001D24B8 /* FilmCell.swift in Sources */,
 				A9FB58822AF9141C0077B700 /* AppDelegate.swift in Sources */,
-				A9FB58CE2AF916180077B700 /* HTTPMethod.swift in Sources */,
-				A9FB58C92AF915B50077B700 /* CoreNetworkManager.swift in Sources */,
 				A9FB58DC2AF96EDF0077B700 /* SearchOptionsViewController.swift in Sources */,
 				A98FA79D2AFBC84E001D24B8 /* UIImage+Extension.swift in Sources */,
 				A98FA76B2AFA5253001D24B8 /* SectionHeader.swift in Sources */,
@@ -913,6 +861,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		A945009D2B8B86DB0003785E /* XCRemoteSwiftPackageReference "MNetwork" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/canamaemindevar/MNetwork.git";
+			requirement = {
+				branch = transferingFolders;
+				kind = branch;
+			};
+		};
+		A94BED572B8B95D800592CF7 /* XCRemoteSwiftPackageReference "MCore" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/canamaemindevar/MCore.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		A98FA7722AFAD321001D24B8 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
@@ -924,6 +888,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		A945009E2B8B86DB0003785E /* MNetwork */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A945009D2B8B86DB0003785E /* XCRemoteSwiftPackageReference "MNetwork" */;
+			productName = MNetwork;
+		};
+		A94BED582B8B95D800592CF7 /* MCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A94BED572B8B95D800592CF7 /* XCRemoteSwiftPackageReference "MCore" */;
+			productName = MCore;
+		};
 		A98FA7732AFAD321001D24B8 /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A98FA7722AFAD321001D24B8 /* XCRemoteSwiftPackageReference "SDWebImage" */;

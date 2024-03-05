@@ -5,6 +5,7 @@
 //  Created by Emincan Antalyalı on 7.11.2023.
 //
 import UIKit
+import MCore
 
 final class LastSearchsCell: UICollectionViewCell {
     static let identifier = "LastSearchsCell"

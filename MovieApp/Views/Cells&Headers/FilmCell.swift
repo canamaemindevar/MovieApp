@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MCore
 
 final class FilmCollectionViewCell: UICollectionViewCell {
     static let identifier = "FilmCollectionViewCell"

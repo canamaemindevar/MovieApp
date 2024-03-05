@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MCore
 
 struct UserDefaultManager {
     static let shared = UserDefaultManager()

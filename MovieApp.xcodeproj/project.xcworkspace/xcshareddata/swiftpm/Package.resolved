@@ -1,12 +1,30 @@
 {
   "pins" : [
     {
+      "identity" : "mcore",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/canamaemindevar/MCore.git",
+      "state" : {
+        "revision" : "ee22e55e6981de2af3c9781059a3d78df3ed332f",
+        "version" : "1.0.1"
+      }
+    },
+    {
+      "identity" : "mnetwork",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/canamaemindevar/MNetwork.git",
+      "state" : {
+        "branch" : "transferingFolders",
+        "revision" : "f74c6033fa9cc6a7401e40e0d674ff0a03f45cbc"
+      }
+    },
+    {
       "identity" : "sdwebimage",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImage.git",
       "state" : {
-        "revision" : "fd1950de05a5ad77cb252fd88576c1e1809ee50d",
-        "version" : "5.18.4"
+        "revision" : "73b9397cfbd902f606572964055464903b1d84c6",
+        "version" : "5.19.0"
       }
     }
   ],

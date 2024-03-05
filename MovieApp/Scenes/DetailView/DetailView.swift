@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MNetwork
 
 protocol DetailViewInterface: AnyObject {
     func prepare()

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import MNetwork
 protocol MainViewModelInterface {
     func viewDidLoad()
     var filterModel: SearchOptions { get set}
@@ -125,25 +125,9 @@ extension MainViewModel {
                         let value =  searchResults.map { element in
                                 TitleQueryResponse(title: element.title,
                                                year: element.year,
-                                               rated: nil,
-                                               released: nil,
-                                               runtime: nil,
-                                               genre: nil,
-                                               director: nil,
-                                               writer: nil,
-                                               actors: nil,
-                                               plot: nil,
-                                               language: nil,
-                                               country: nil,
-                                               awards: nil,
                                                poster: element.poster,
-                                               metascore: nil,
-                                               imdbRating: nil,
-                                               imdbVotes: nil,
                                                imdbID: element.imdbID,
-                                               type: element.type,
-                                               response: nil,
-                                               ratings: nil)
+                                               type: element.type)
                         }
                         handleTitleQueryResponse(response: .success(value))
                     }

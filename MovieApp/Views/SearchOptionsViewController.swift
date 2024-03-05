@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MCore
 
 protocol QueryFiltersMakeble: AnyObject {
     func makeQueryFilter(model: SearchOptions)

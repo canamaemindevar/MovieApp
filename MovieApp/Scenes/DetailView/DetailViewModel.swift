@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MNetwork
 
 protocol DetailViewModelInterface {
     func viewDidLoad()

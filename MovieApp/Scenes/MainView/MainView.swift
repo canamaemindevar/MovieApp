@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MNetwork
 
 protocol MainViewInterface: AnyObject {
     func prepare()
