@@ -7,7 +7,7 @@
 
 import SwiftUI
 import MNetwork
-
+import MCore
 protocol MainViewInterface: AnyObject {
     func prepare()
     func reloadCollectionView()

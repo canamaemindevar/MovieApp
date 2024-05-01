@@ -7,6 +7,7 @@
 
 import Foundation
 import MNetwork
+import MCore
 protocol MainViewModelInterface {
     func viewDidLoad()
     var filterModel: SearchOptions { get set}

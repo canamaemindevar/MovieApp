@@ -15,7 +15,7 @@
       "location" : "https://github.com/canamaemindevar/MNetwork.git",
       "state" : {
         "branch" : "transferingFolders",
-        "revision" : "f74c6033fa9cc6a7401e40e0d674ff0a03f45cbc"
+        "revision" : "65702d524b6e98dd6465018081eac2a2b2e5b73a"
       }
     },
     {
@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImage.git",
       "state" : {
-        "revision" : "73b9397cfbd902f606572964055464903b1d84c6",
-        "version" : "5.19.0"
+        "revision" : "f6afa0132961d593f07970d84e2d8b588c29ea04",
+        "version" : "5.19.1"
       }
     }
   ],
