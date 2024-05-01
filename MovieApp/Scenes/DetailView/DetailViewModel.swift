@@ -13,10 +13,10 @@ protocol DetailViewModelInterface {
 }
 
 final class DetailViewModel: DetailViewModelInterface {
-    private weak var view: DetailViewInterface?
+    private weak var view: DetailViewControllerInterface?
     private weak var manager: IdAndTitleQueryMakeable?
 
-    init(view: DetailViewInterface,manager: IdAndTitleQueryMakeable?) {
+    init(view: DetailViewControllerInterface,manager: IdAndTitleQueryMakeable?) {
         self.view = view
         self.manager = manager
     }

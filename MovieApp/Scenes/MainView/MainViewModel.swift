@@ -12,9 +12,9 @@ protocol MainViewModelInterface {
     func viewDidLoad()
     var filterModel: SearchOptions { get set}
     func makeQuery(withWord: String)
-    func handleSearchResponse(response:Result<SearchResponse,ErrosTypes>)
-    func handleTitleQueryResponse(response:Result<[TitleQueryResponse],ErrosTypes>)
-    func handleResponse(response:Result<TitleQueryResponse,ErrosTypes>)
+    func handleSearchResponse(response:Result<SearchResponse,ErrorTypes>)
+    func handleTitleQueryResponse(response:Result<[TitleQueryResponse],ErrorTypes>)
+    func handleResponse(response:Result<TitleQueryResponse,ErrorTypes>)
     var searchData: [TitleQueryResponse] { get set}
     var lastSearchData:[TitleQueryResponse] { get set}
     func viewWillAppear()
@@ -22,14 +22,14 @@ protocol MainViewModelInterface {
 
 final class MainViewModel: MainViewModelInterface {
 
-    private weak var view: MainViewInterface?
+    private weak var view: MainViewControllerInterface?
     private var manager: (IdAndTitleQueryMakeable & SearchQueryMakeable)?
 
     var filterModel: SearchOptions = .init(option: .generalSearch,selectedSecond: .all)
     var searchData = [TitleQueryResponse]()
     var lastSearchData = [TitleQueryResponse]()
     var enterCount = 0
-    init(view: MainViewInterface, manager: (IdAndTitleQueryMakeable & SearchQueryMakeable)?) {
+    init(view: MainViewControllerInterface, manager: (IdAndTitleQueryMakeable & SearchQueryMakeable)?) {
         self.view = view
         self.manager = manager
     }
@@ -93,7 +93,7 @@ final class MainViewModel: MainViewModelInterface {
 }
 //MARK: - Handle Functions
 extension MainViewModel {
-    func handleResponse(response:Result<TitleQueryResponse,ErrosTypes>) {
+    func handleResponse(response:Result<TitleQueryResponse,ErrorTypes>) {
         switch response {
             case .success(let success):
                 if success.response == K.trueValid.rawValue {
@@ -107,7 +107,7 @@ extension MainViewModel {
         }
     }
 
-    func handleTitleQueryResponse(response:Result<[TitleQueryResponse],ErrosTypes>) {
+    func handleTitleQueryResponse(response:Result<[TitleQueryResponse],ErrorTypes>) {
         switch response {
             case .success(let success):
                 let data: [TitleQueryResponse] = success
@@ -118,7 +118,7 @@ extension MainViewModel {
         }
     }
 
-    func handleSearchResponse(response:Result<SearchResponse,ErrosTypes>) {
+    func handleSearchResponse(response:Result<SearchResponse,ErrorTypes>) {
         switch response {
             case .success(let success):
                 if success.response == K.trueValid.rawValue {

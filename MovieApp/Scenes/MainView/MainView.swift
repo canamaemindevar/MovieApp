@@ -8,15 +8,15 @@
 import SwiftUI
 import MNetwork
 import MCore
-protocol MainViewInterface: AnyObject {
+protocol MainViewControllerInterface: AnyObject {
     func prepare()
     func reloadCollectionView()
     func presentEmptyDataAlert()
 }
 
-final class MainView: UIViewController, UISearchControllerDelegate {
-    
-    private lazy var viewModel = MainViewModel(view: self, manager: NetworkManager.shared)
+final class MainViewController: UIViewController, UISearchControllerDelegate {
+
+    private lazy var viewModel = MainViewModel(view: self, manager: NetworkManager())
     private var navVc = UINavigationController()
 
     //MARK: - Components
@@ -47,7 +47,7 @@ final class MainView: UIViewController, UISearchControllerDelegate {
     }
 }
 
-private extension MainView {
+private extension MainViewController {
     func setupNavigationView() {
         navigationItem.searchController = searchVc
         let searchButton = UIBarButtonItem(image: UIImage(systemName: "slider.horizontal.3"), style: .plain, target: self, action: #selector(showFilters))
@@ -70,7 +70,7 @@ private extension MainView {
 
 //MARK: - MainViewViewInterface
 
-extension MainView: MainViewInterface {
+extension MainViewController: MainViewControllerInterface {
     func reloadCollectionView() {
         DispatchQueue.main.async {
             self.mainCollectionView.reloadData()
@@ -90,14 +90,14 @@ extension MainView: MainViewInterface {
 }
 //MARK: - QueryFiltersMakeble
 
-extension MainView :QueryFiltersMakeble {
+extension MainViewController :QueryFiltersMakeble {
     func makeQueryFilter(model: SearchOptions) {
         viewModel.filterModel = model
     }
 }
 //MARK: - Presenting Modals
 
-extension MainView {
+extension MainViewController {
    private func presentPickerForFilter() {
         lazy var vc = SearchOptionsViewController()
         vc.delegate = self
@@ -123,16 +123,16 @@ extension MainView {
 }
 //MARK: - UICollectionViewDelegate
 
-extension MainView: UICollectionViewDelegate {
+extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = DetailView()
+        let vc = DetailViewController()
         vc.id = viewModel.searchData[indexPath.item].imdbID
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 //MARK: - UICollectionViewDataSource
 
-extension MainView: UICollectionViewDataSource {
+extension MainViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section {
             case 0:
@@ -177,7 +177,7 @@ extension MainView: UICollectionViewDataSource {
 }
 // MARK: - UICollectionViewCompositionalLayout
 
-private extension MainView {
+private extension MainViewController {
     func createLayout() -> UICollectionViewCompositionalLayout {
         UICollectionViewCompositionalLayout { sectionIndex,_ in
             switch sectionIndex {
@@ -238,7 +238,7 @@ private extension MainView {
     }
 }
 //MARK: - UISearchBarDelegate
-extension MainView: UISearchBarDelegate {
+extension MainViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let text = searchBar.text, !text.isEmpty else {return }
         viewModel.makeQuery(withWord: text)

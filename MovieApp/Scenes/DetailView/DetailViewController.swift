@@ -9,15 +9,15 @@ import UIKit
 import MNetwork
 import MCore
 
-protocol DetailViewInterface: AnyObject {
+protocol DetailViewControllerInterface: AnyObject {
     func prepare()
     var id: String? { get set}
     var data: TitleQueryResponse? { get set}
 }
 
-final class DetailView: UIViewController {
-    
-    private lazy var viewModel = DetailViewModel(view: self, manager: NetworkManager.shared)
+final class DetailViewController: UIViewController {
+
+    private lazy var viewModel = DetailViewModel(view: self, manager: NetworkManager())
     var id: String?
     var data: TitleQueryResponse? {
         didSet {
@@ -136,7 +136,7 @@ final class DetailView: UIViewController {
 
 //MARK: - DetailViewViewInterface
 
-extension DetailView: DetailViewInterface {
+extension DetailViewController: DetailViewControllerInterface {
 
   func prepare() { 
       view.backgroundColor = .backgroundColor
