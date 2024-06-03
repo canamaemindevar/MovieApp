@@ -14,7 +14,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/canamaemindevar/MNetwork.git",
       "state" : {
-        "branch" : "transferingFolders",
+        "branch" : "develop",
         "revision" : "3fa85b7187e402cb0e63347855e8a59ae3ad023a"
       }
     },

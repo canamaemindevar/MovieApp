@@ -915,7 +915,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/canamaemindevar/MNetwork.git";
 			requirement = {
-				branch = transferingFolders;
+				branch = develop;
 				kind = branch;
 			};
 		};
