@@ -50,7 +50,7 @@ To run this project locally, follow these steps:
    git checkout <branch-name>
 3. Open the project in Xcode:
    ```sh
-  open MovieApp.xcodeproj
+   open MovieApp.xcodeproj
 4. Build and run the application:
    ```sh
    Cmd + R
