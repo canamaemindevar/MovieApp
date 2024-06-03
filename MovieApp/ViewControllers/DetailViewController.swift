@@ -17,7 +17,7 @@ protocol DetailViewControllerInterface: AnyObject {
 
 final class DetailViewController: UIViewController {
 
-    private lazy var viewModel = DetailViewModel(view: self, manager: NetworkManager())
+    private lazy var viewModel = DetailViewModel(view: self, manager: NetworkManagerImpl())
     var id: String?
     var data: TitleQueryResponse? {
         didSet {

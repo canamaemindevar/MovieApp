@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "mnetwork",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/canamaemindevar/MNetwork.git",
+      "state" : {
+        "branch" : "transferingFolders",
+        "revision" : "3fa85b7187e402cb0e63347855e8a59ae3ad023a"
+      }
+    },
+    {
       "identity" : "sdwebimage",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImage.git",

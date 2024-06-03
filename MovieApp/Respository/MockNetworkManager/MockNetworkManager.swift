@@ -17,6 +17,11 @@ extension MockNetworkManager: IdAndTitleQueryMakeable{
     func makeQueryWithID(id: String, completion: @escaping (Result<TitleQueryResponse, ErrorTypes>) -> Void) {
 
         // mock data response
+        guard let response = MockJsonParseManager.parse(mockSearchResponseJson, model: TitleQueryResponse.self) else {
+            completion(.failure(.parsingError))
+            return
+        }
+        completion(.success(response))
     }
 
     func makeQueryWithTitle(title: String, completion: @escaping (Result< TitleQueryResponse, ErrorTypes>) -> Void) {

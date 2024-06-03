@@ -10,7 +10,7 @@ import Foundation
 final class Logger {
     static let shared = Logger()
     private init() { }
-    var shouldPrint: Bool = true
+    var shouldPrint: Bool = false
 
     func log(text: String, function: String = #function, line: Int = #line, filePath: String = #filePath) {
         guard shouldPrint else { return }

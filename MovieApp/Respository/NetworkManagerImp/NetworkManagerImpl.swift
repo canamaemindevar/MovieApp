@@ -9,12 +9,12 @@ import Foundation
 import MCore
 import MNetwork
 
-final class NetworkManager {
+final class NetworkManagerImpl {
     let manager = CoreNetworkManager()
     init() {}
 }
 
-extension NetworkManager: IdAndTitleQueryMakeable {
+extension NetworkManagerImpl: IdAndTitleQueryMakeable {
     public func makeQueryWithID(id: String, completion: @escaping (Result<TitleQueryResponse, ErrorTypes>) -> Void) {
         let endPoint = Endpoint.idSearch(id: id)
         manager.request(endPoint, completion: completion)
@@ -26,7 +26,7 @@ extension NetworkManager: IdAndTitleQueryMakeable {
     }
 }
 
-extension NetworkManager: SearchQueryMakeable {
+extension NetworkManagerImpl: SearchQueryMakeable {
 
     public func makeSearchQuery(word: String, year: String?, type: String?, completion: @escaping (Result<SearchResponse, ErrorTypes>) -> Void) {
         let endPoint = Endpoint.search(searchWord: word, year: year, type: type)

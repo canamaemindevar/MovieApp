@@ -16,7 +16,7 @@ protocol MainViewControllerInterface: AnyObject {
 
 final class MainViewController: UIViewController, UISearchControllerDelegate {
 
-    private lazy var viewModel = MainViewModel(view: self, manager: NetworkManager())
+    private lazy var viewModel = MainViewModel(view: self, manager: NetworkManagerImpl())
     private var navVc = UINavigationController()
 
     //MARK: - Components
